@@ -10,12 +10,12 @@
 		C719F9592867373B001A8024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9582867373B001A8024 /* AppDelegate.swift */; };
 		C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F95A2867373B001A8024 /* SceneDelegate.swift */; };
 		C719F95D2867373B001A8024 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F95C2867373B001A8024 /* ViewController.swift */; };
-		C719F9602867373B001A8024 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C719F95E2867373B001A8024 /* Main.storyboard */; };
 		C719F9622867373C001A8024 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C719F9612867373C001A8024 /* Assets.xcassets */; };
 		C719F9652867373C001A8024 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C719F9632867373C001A8024 /* LaunchScreen.storyboard */; };
 		C719F9702867373C001A8024 /* FlickrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F96F2867373C001A8024 /* FlickrTests.swift */; };
 		C719F97A2867373C001A8024 /* FlickrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9792867373C001A8024 /* FlickrUITests.swift */; };
 		C719F97C2867373C001A8024 /* FlickrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */; };
+		C719F98B286737BD001A8024 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F98A286737BD001A8024 /* GalleryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,6 @@
 		C719F9582867373B001A8024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C719F95A2867373B001A8024 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C719F95C2867373B001A8024 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C719F95F2867373B001A8024 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C719F9612867373C001A8024 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C719F9642867373C001A8024 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C719F9662867373C001A8024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		C719F9752867373C001A8024 /* FlickrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C719F9792867373C001A8024 /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C719F98A286737BD001A8024 /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +99,10 @@
 		C719F9572867373B001A8024 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				C719F98828673799001A8024 /* PresentationLayer */,
 				C719F9582867373B001A8024 /* AppDelegate.swift */,
 				C719F95A2867373B001A8024 /* SceneDelegate.swift */,
 				C719F95C2867373B001A8024 /* ViewController.swift */,
-				C719F95E2867373B001A8024 /* Main.storyboard */,
 				C719F9612867373C001A8024 /* Assets.xcassets */,
 				C719F9632867373C001A8024 /* LaunchScreen.storyboard */,
 				C719F9662867373C001A8024 /* Info.plist */,
@@ -125,6 +125,22 @@
 				C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */,
 			);
 			path = FlickrUITests;
+			sourceTree = "<group>";
+		};
+		C719F98828673799001A8024 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				C719F989286737AC001A8024 /* GalleryController */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		C719F989286737AC001A8024 /* GalleryController */ = {
+			isa = PBXGroup;
+			children = (
+				C719F98A286737BD001A8024 /* GalleryController.swift */,
+			);
+			path = GalleryController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +249,6 @@
 			files = (
 				C719F9652867373C001A8024 /* LaunchScreen.storyboard in Resources */,
 				C719F9622867373C001A8024 /* Assets.xcassets in Resources */,
-				C719F9602867373B001A8024 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +275,7 @@
 			files = (
 				C719F95D2867373B001A8024 /* ViewController.swift in Sources */,
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
+				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,14 +313,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C719F95E2867373B001A8024 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C719F95F2867373B001A8024 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C719F9632867373C001A8024 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,7 +449,6 @@
 				INFOPLIST_FILE = Flickr/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,7 +475,6 @@
 				INFOPLIST_FILE = Flickr/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
