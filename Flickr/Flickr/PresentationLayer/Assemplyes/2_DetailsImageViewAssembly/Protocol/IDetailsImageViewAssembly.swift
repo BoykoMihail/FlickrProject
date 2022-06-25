@@ -11,4 +11,3 @@ protocol IDetailsImageViewAssembly {
     
     func assembly(viewModel: DetailsViewModel) -> UIViewController
 }
-

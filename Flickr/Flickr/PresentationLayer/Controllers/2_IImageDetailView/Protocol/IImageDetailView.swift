@@ -12,4 +12,3 @@ protocol IImageDetailView: AnyObject {
     func updateImage(with image: UIImage, size: CGSize)
     func updateLabel(with string: String)
 }
-

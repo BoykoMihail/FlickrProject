@@ -144,4 +144,3 @@ final class GalleryPresenter: IGalleryPresenter {
         /// Обработчик ошибки
     }
 }
-

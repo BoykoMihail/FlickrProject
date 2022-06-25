@@ -12,4 +12,3 @@ struct DetailsViewModel {
     let name: String
     let size: CGSize
 }
-

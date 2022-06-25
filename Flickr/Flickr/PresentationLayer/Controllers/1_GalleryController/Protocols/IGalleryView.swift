@@ -10,4 +10,3 @@ import UIKit
 protocol IGalleryView: AnyObject {
     func updateData()
 }
-

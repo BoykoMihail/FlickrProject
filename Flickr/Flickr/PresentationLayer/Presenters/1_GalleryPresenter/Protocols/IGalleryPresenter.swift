@@ -17,4 +17,3 @@ protocol IGalleryPresenter {
     
     var photos: [FlickrPhoto] { get }
 }
-

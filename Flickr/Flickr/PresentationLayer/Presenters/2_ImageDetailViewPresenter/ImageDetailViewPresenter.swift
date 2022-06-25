@@ -22,4 +22,3 @@ final class ImageDetailViewPresenter: IImageDetailViewPresenter {
         view?.updateLabel(with: viewModel.name)
     }
 }
-

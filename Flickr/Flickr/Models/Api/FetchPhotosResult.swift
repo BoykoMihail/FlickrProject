@@ -13,4 +13,3 @@ struct FetchPhotosResult: Decodable {
         case photos
     }
 }
-

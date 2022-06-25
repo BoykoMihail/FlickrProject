@@ -10,4 +10,3 @@ import Foundation
 protocol IMainGalleryRouter {
     func moveToDetailsImageView(viewModel: DetailsViewModel)
 }
-

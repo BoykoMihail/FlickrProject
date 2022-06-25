@@ -9,18 +9,18 @@ import Foundation
 
 final class PrepareForLoadingService {
     
-    let flickrService: CacheExexutor
+    let cacheExexutor: CacheExexutor
     let imageLoader: IImageLoader
     
-    init(flickrService: CacheExexutor,
+    init(cacheExexutor: CacheExexutor,
          imageLoader: IImageLoader) {
-        self.flickrService = flickrService
+        self.cacheExexutor = cacheExexutor
         self.imageLoader = imageLoader
     }
     
     func prepareForLoading() {
         DispatchQueue.global(qos: .userInitiated).async {
-            self.flickrService.warmUpCache { [weak self] imageUrls in
+            self.cacheExexutor.warmUpCache { [weak self] imageUrls in
                 if let imageUrls = imageUrls {
                     imageUrls.forEach{
                         self?.imageLoader.downloadImage(from: $0) { _,_ in }

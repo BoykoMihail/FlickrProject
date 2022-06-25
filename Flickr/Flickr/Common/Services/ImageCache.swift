@@ -8,7 +8,7 @@
 import UIKit
 
 private extension Int {
-    static let defaultCountLimit = 100
+    static let defaultCountLimit = 200
 }
 
 final class ImageCache {

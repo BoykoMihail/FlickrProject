@@ -12,4 +12,3 @@ protocol IImageCache: AnyObject {
 
     subscript(_ url: URL) -> UIImage? { get set }
 }
-

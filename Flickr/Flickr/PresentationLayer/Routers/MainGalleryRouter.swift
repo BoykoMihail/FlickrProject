@@ -23,4 +23,3 @@ final class MainGalleryRouter: IMainGalleryRouter {
         navigationController.pushViewController(detailsImageView, animated: true)
     }
 }
-

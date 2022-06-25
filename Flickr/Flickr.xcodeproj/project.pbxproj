@@ -192,13 +192,13 @@
 			path = PresentationLayer;
 			sourceTree = "<group>";
 		};
-		C719F989286737AC001A8024 /* GalleryController */ = {
+		C719F989286737AC001A8024 /* 1_GalleryController */ = {
 			isa = PBXGroup;
 			children = (
 				C719F99728673BB9001A8024 /* Protocols */,
 				C719F98A286737BD001A8024 /* GalleryController.swift */,
 			);
-			path = GalleryController;
+			path = 1_GalleryController;
 			sourceTree = "<group>";
 		};
 		C719F98C286739D5001A8024 /* Views */ = {
@@ -220,19 +220,19 @@
 		C719F99028673B0D001A8024 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				C719F9CE286754CC001A8024 /* ImageDetailViewPresenter */,
-				C719F99128673B1D001A8024 /* GalleryPresenter */,
+				C719F99128673B1D001A8024 /* 1_GalleryPresenter */,
+				C719F9CE286754CC001A8024 /* 2_ImageDetailViewPresenter */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
 		};
-		C719F99128673B1D001A8024 /* GalleryPresenter */ = {
+		C719F99128673B1D001A8024 /* 1_GalleryPresenter */ = {
 			isa = PBXGroup;
 			children = (
 				C719F99228673B26001A8024 /* Protocols */,
 				C719F99528673B5D001A8024 /* GalleryPresenter.swift */,
 			);
-			path = GalleryPresenter;
+			path = 1_GalleryPresenter;
 			sourceTree = "<group>";
 		};
 		C719F99228673B26001A8024 /* Protocols */ = {
@@ -254,9 +254,9 @@
 		C719F99828673BC5001A8024 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C719F9C828675481001A8024 /* IImageDetailView */,
 				C719F9B0286744B3001A8024 /* Base */,
-				C719F989286737AC001A8024 /* GalleryController */,
+				C719F989286737AC001A8024 /* 1_GalleryController */,
+				C719F9C828675481001A8024 /* 2_IImageDetailView */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -264,18 +264,18 @@
 		C719F99B28673CFD001A8024 /* Assemplyes */ = {
 			isa = PBXGroup;
 			children = (
-				C719F9C028675405001A8024 /* DetailsImageViewAssembly */,
-				C719F99C28673D09001A8024 /* GalleryAssembly */,
+				C719F99C28673D09001A8024 /* 1_GalleryAssembly */,
+				C719F9C028675405001A8024 /* 2_DetailsImageViewAssembly */,
 			);
 			path = Assemplyes;
 			sourceTree = "<group>";
 		};
-		C719F99C28673D09001A8024 /* GalleryAssembly */ = {
+		C719F99C28673D09001A8024 /* 1_GalleryAssembly */ = {
 			isa = PBXGroup;
 			children = (
 				C719F99D28673D10001A8024 /* GalleryAssembly.swift */,
 			);
-			path = GalleryAssembly;
+			path = 1_GalleryAssembly;
 			sourceTree = "<group>";
 		};
 		C719F99F28673D99001A8024 /* Common */ = {
@@ -337,13 +337,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		C719F9C028675405001A8024 /* DetailsImageViewAssembly */ = {
+		C719F9C028675405001A8024 /* 2_DetailsImageViewAssembly */ = {
 			isa = PBXGroup;
 			children = (
 				C719F9C12867540B001A8024 /* Protocol */,
 				C719F9C42867542F001A8024 /* DetailsImageViewAssembly.swift */,
 			);
-			path = DetailsImageViewAssembly;
+			path = 2_DetailsImageViewAssembly;
 			sourceTree = "<group>";
 		};
 		C719F9C12867540B001A8024 /* Protocol */ = {
@@ -354,13 +354,13 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		C719F9C828675481001A8024 /* IImageDetailView */ = {
+		C719F9C828675481001A8024 /* 2_IImageDetailView */ = {
 			isa = PBXGroup;
 			children = (
 				C719F9C928675485001A8024 /* Protocol */,
 				C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */,
 			);
-			path = IImageDetailView;
+			path = 2_IImageDetailView;
 			sourceTree = "<group>";
 		};
 		C719F9C928675485001A8024 /* Protocol */ = {
@@ -371,13 +371,13 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		C719F9CE286754CC001A8024 /* ImageDetailViewPresenter */ = {
+		C719F9CE286754CC001A8024 /* 2_ImageDetailViewPresenter */ = {
 			isa = PBXGroup;
 			children = (
 				C719F9CF286754D4001A8024 /* Protocol */,
 				C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */,
 			);
-			path = ImageDetailViewPresenter;
+			path = 2_ImageDetailViewPresenter;
 			sourceTree = "<group>";
 		};
 		C719F9CF286754D4001A8024 /* Protocol */ = {

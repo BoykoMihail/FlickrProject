@@ -19,4 +19,3 @@ final class DetailsImageViewAssembly: IDetailsImageViewAssembly {
         return viewController
     }
 }
-
