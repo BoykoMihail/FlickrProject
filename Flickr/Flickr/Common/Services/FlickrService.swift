@@ -21,13 +21,13 @@ class FlickrService: IFlickrService {
     
     func fetchPhotos(onCompletion: @escaping FlickrResponse) {
         if currentPage > amountOfPages {
-            onCompletion(nil, nil)
+            onCompletion(FlickrServiceCustomErrors.thisIsLastPage, nil)
             return
         }
         let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=\(Flickr.applicationKey)&extras=url_m&per_page=\(Flickr.perPage)&page=\(currentPage)&format=json&nojsoncallback=1"
         
         guard let url: NSURL = NSURL(string: urlString) else {
-            onCompletion(nil, nil)
+            onCompletion(FlickrServiceCustomErrors.wrongURL, nil)
             return
         }
         
@@ -40,12 +40,12 @@ class FlickrService: IFlickrService {
                 }
                 
                 guard let data = data else {
-                    onCompletion(nil, nil)
+                    onCompletion(FlickrServiceCustomErrors.ephtyData, nil)
                     return
                 }
                 
                 guard let parsedResult = try? JSONDecoder().decode(FetchPhotosResult.self, from: data) else {
-                    onCompletion(nil, nil)
+                    onCompletion(FlickrServiceCustomErrors.decodeError, nil)
                     return
                 }
                             
