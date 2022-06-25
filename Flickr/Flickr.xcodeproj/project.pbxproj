@@ -16,6 +16,7 @@
 		C719F97A2867373C001A8024 /* FlickrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9792867373C001A8024 /* FlickrUITests.swift */; };
 		C719F97C2867373C001A8024 /* FlickrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */; };
 		C719F98B286737BD001A8024 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F98A286737BD001A8024 /* GalleryController.swift */; };
+		C719F98F28673A01001A8024 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F98E28673A01001A8024 /* ImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C719F9792867373C001A8024 /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C719F98A286737BD001A8024 /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
+		C719F98E28673A01001A8024 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 		C719F98828673799001A8024 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C719F98C286739D5001A8024 /* Views */,
 				C719F989286737AC001A8024 /* GalleryController */,
 			);
 			path = PresentationLayer;
@@ -141,6 +144,22 @@
 				C719F98A286737BD001A8024 /* GalleryController.swift */,
 			);
 			path = GalleryController;
+			sourceTree = "<group>";
+		};
+		C719F98C286739D5001A8024 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C719F98D286739E5001A8024 /* ImageCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C719F98D286739E5001A8024 /* ImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				C719F98E28673A01001A8024 /* ImageCell.swift */,
+			);
+			path = ImageCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +296,7 @@
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,
+				C719F98F28673A01001A8024 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

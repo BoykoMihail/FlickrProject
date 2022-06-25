@@ -7,11 +7,16 @@
 
 import UIKit
 
+private extension String {
+    static let tableViewCellIdentifier = "ImageCell"
+}
+
 class GalleryController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ImageCell.self, forCellReuseIdentifier: .tableViewCellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -61,8 +66,14 @@ extension GalleryController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: .tableViewCellIdentifier, for: indexPath) as? ImageCell else {
+            return UITableViewCell()
+        }
+
+        cell.clearImage()
+        
         cell.backgroundColor = .blue
+        
         return cell
     }
 }
