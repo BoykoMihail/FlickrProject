@@ -11,7 +11,7 @@ private extension String {
     static let tableViewCellIdentifier = "ImageCell"
 }
 
-class GalleryController: UIViewController, IGalleryView {
+class GalleryController: BaseViewController, IGalleryView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -29,18 +29,16 @@ class GalleryController: UIViewController, IGalleryView {
         
         title = "Flickr's Gallery"
         presenter?.viewDidLoad()
-        addSubViews()
-        setupConstraints()
     }
     // MARK: - Setting Views
     
-    func addSubViews() {
+    override func addSubViews() {
         view.addSubview(tableView)
     }
     
     // MARK: - Setting Constraints
     
-    func setupConstraints() {
+    override func setupConstraints() {
         let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
