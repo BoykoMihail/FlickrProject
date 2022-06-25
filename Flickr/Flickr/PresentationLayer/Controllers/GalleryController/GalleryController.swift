@@ -61,7 +61,9 @@ class GalleryController: BaseViewController, IGalleryView {
 
 extension GalleryController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didTapCell(indexPath: indexPath.row)
+    }
 }
 
 extension GalleryController: UITableViewDataSource {
@@ -83,7 +85,11 @@ extension GalleryController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.photos.count ?? 0
+        guard let presenter = presenter else {
+            return .zero
+        }
+        
+        return presenter.photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,6 +101,16 @@ extension GalleryController: UITableViewDataSource {
         cell.clearImage()
         presenter.getImageFor(index: indexPath.row) {
             cell.lazyImage = $0
+        }
+        
+        if indexPath.row > presenter.photos.count - 17 {
+            DispatchQueue.global(qos: .userInteractive).async {
+                presenter.loadPhotos()
+            }
+            
+            DispatchQueue.global(qos: .background).async {
+                presenter.clearImage(index: indexPath.row)
+            }
         }
         
         

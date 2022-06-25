@@ -11,14 +11,13 @@ final class GalleryPresenter: IGalleryPresenter {
     
     private let flickrService: IFlickrService
     private let imageLoader: IImageLoader
-
-    private var isUpdating = false
     
+    private var isUpdating = false
     private let concurrentQueue = DispatchQueue(label: "gallerypresenter.concurrent.queue", attributes: .concurrent)
     private let lock = NSLock()
-
+    
     weak var viewController: IGalleryView?
-
+    
     var photos: [FlickrPhoto] = []
     
     init(flickrService: IFlickrService,
@@ -37,7 +36,6 @@ final class GalleryPresenter: IGalleryPresenter {
         }
         
         isUpdating = true
-        
         flickrService.fetchPhotos { [weak self] error, flickrPhoto in
             
             if let error = error {
@@ -103,7 +101,29 @@ final class GalleryPresenter: IGalleryPresenter {
         }
     }
     
-    func didTapCell(indexPath: Int) { }
+    func didTapCell(indexPath: Int) {
+        lock.lock()
+        let photo = photos[indexPath]
+        lock.unlock()
+        
+        guard let image = photo.image else {
+            return
+        }
+        
+        debugPrint("///// image not nil")
+    }
+    
+    func clearImage(index: Int) {
+        concurrentQueue.async {
+            for i in (0..<self.photos.count){
+                if abs(i-index) > 20, self.photos[i].image != nil {
+                    self.lock.lock()
+                    self.photos[i].image = nil
+                    self.lock.unlock()
+                }
+            }
+        }
+    }
     
     private func handleError(with error: Error) {
         /// Обработчик ошибки
