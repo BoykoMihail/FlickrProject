@@ -22,6 +22,8 @@ class GalleryController: UIViewController, IGalleryView {
         return tableView
     }()
         
+    var presenter: IGalleryPresenter?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

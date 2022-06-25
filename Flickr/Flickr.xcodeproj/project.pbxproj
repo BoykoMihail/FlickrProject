@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C719F9592867373B001A8024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9582867373B001A8024 /* AppDelegate.swift */; };
 		C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F95A2867373B001A8024 /* SceneDelegate.swift */; };
-		C719F95D2867373B001A8024 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F95C2867373B001A8024 /* ViewController.swift */; };
 		C719F9622867373C001A8024 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C719F9612867373C001A8024 /* Assets.xcassets */; };
 		C719F9652867373C001A8024 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C719F9632867373C001A8024 /* LaunchScreen.storyboard */; };
 		C719F9702867373C001A8024 /* FlickrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F96F2867373C001A8024 /* FlickrTests.swift */; };
@@ -20,6 +19,7 @@
 		C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99328673B32001A8024 /* IGalleryPresenter.swift */; };
 		C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99528673B5D001A8024 /* GalleryPresenter.swift */; };
 		C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99928673BD3001A8024 /* IGalleryView.swift */; };
+		C719F99E28673D10001A8024 /* GalleryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99D28673D10001A8024 /* GalleryAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,6 @@
 		C719F9552867373B001A8024 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C719F9582867373B001A8024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C719F95A2867373B001A8024 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C719F95C2867373B001A8024 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C719F9612867373C001A8024 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C719F9642867373C001A8024 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C719F9662867373C001A8024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		C719F99328673B32001A8024 /* IGalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGalleryPresenter.swift; sourceTree = "<group>"; };
 		C719F99528673B5D001A8024 /* GalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPresenter.swift; sourceTree = "<group>"; };
 		C719F99928673BD3001A8024 /* IGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGalleryView.swift; sourceTree = "<group>"; };
+		C719F99D28673D10001A8024 /* GalleryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,6 @@
 				C719F98828673799001A8024 /* PresentationLayer */,
 				C719F9582867373B001A8024 /* AppDelegate.swift */,
 				C719F95A2867373B001A8024 /* SceneDelegate.swift */,
-				C719F95C2867373B001A8024 /* ViewController.swift */,
 				C719F9612867373C001A8024 /* Assets.xcassets */,
 				C719F9632867373C001A8024 /* LaunchScreen.storyboard */,
 				C719F9662867373C001A8024 /* Info.plist */,
@@ -138,6 +137,7 @@
 		C719F98828673799001A8024 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C719F99B28673CFD001A8024 /* Assemplyes */,
 				C719F99828673BC5001A8024 /* Controllers */,
 				C719F99028673B0D001A8024 /* Presenters */,
 				C719F98C286739D5001A8024 /* Views */,
@@ -209,6 +209,22 @@
 				C719F989286737AC001A8024 /* GalleryController */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C719F99B28673CFD001A8024 /* Assemplyes */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99C28673D09001A8024 /* GalleryAssembly */,
+			);
+			path = Assemplyes;
+			sourceTree = "<group>";
+		};
+		C719F99C28673D09001A8024 /* GalleryAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99D28673D10001A8024 /* GalleryAssembly.swift */,
+			);
+			path = GalleryAssembly;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,8 +359,8 @@
 			files = (
 				C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */,
 				C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */,
-				C719F95D2867373B001A8024 /* ViewController.swift in Sources */,
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
+				C719F99E28673D10001A8024 /* GalleryAssembly.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
 				C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,

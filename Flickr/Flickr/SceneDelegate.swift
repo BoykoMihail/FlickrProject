@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         let navigationController = UINavigationController()
-        navigationController.viewControllers = [GalleryController()]
+        navigationController.viewControllers = [GalleryAssembly().assembly()]
+
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
