@@ -28,6 +28,7 @@ class GalleryController: UIViewController, IGalleryView {
         super.viewDidLoad()
         
         title = "Flickr's Gallery"
+        presenter?.viewDidLoad()
         addSubViews()
         setupConstraints()
     }

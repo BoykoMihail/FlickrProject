@@ -9,13 +9,23 @@ import UIKit
 
 final class GalleryPresenter: IGalleryPresenter {
     
+    private let flickrService: IFlickrService
+    
     weak var viewController: IGalleryView?
+    
+    init(flickrService: IFlickrService) {
+        self.flickrService = flickrService
+    }
     
     func viewDidLoad() {
         loadPhotos()
     }
     
-    func loadPhotos() { }
+    func loadPhotos() {
+        flickrService.fetchPhotos { error, data in
+            debugPrint("//// data = ", data?.count)
+        }
+    }
     
     func getImageFor(index: Int, completion: @escaping (UIImage) -> ()) {
         completion(UIImage())
