@@ -53,6 +53,14 @@ final class GalleryPresenter: IGalleryPresenter {
             self?.lock.lock()
             self?.photos.append(contentsOf: flickrPhoto)
             self?.lock.unlock()
+                    
+            self?.concurrentQueue.async {
+                let to = self?.photos.count ?? 0
+                let from = Swift.max(0, to - flickrPhoto.count)
+                for i in from..<to {
+                    self?.getImageFor(index: i) { _ in }
+                }
+            }
             
             self?.isUpdating = false
 

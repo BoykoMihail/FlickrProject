@@ -64,6 +64,12 @@ extension GalleryController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didTapCell(indexPath: indexPath.row)
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.presenter?.loadPhotos()
+        }
+    }
 }
 
 extension GalleryController: UITableViewDataSource {
@@ -103,11 +109,7 @@ extension GalleryController: UITableViewDataSource {
             cell.lazyImage = $0
         }
         
-        if indexPath.row > presenter.photos.count - 17 {
-            DispatchQueue.global(qos: .userInteractive).async {
-                presenter.loadPhotos()
-            }
-            
+        if indexPath.row > presenter.photos.count - 5 {
             DispatchQueue.global(qos: .background).async {
                 presenter.clearImage(index: indexPath.row)
             }

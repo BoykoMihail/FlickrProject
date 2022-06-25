@@ -57,3 +57,9 @@ class FlickrService: IFlickrService {
     }
 }
 
+extension FlickrService: CacheExexutor {
+    
+    func warmUpCache(onCompletion: @escaping CacheExexutorResponse) {
+        debugPrint("//// warmUpCache ")
+    }
+}

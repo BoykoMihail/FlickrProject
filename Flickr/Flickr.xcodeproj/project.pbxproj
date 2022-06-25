@@ -31,6 +31,8 @@
 		C719F9B628674691001A8024 /* IImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B528674691001A8024 /* IImageLoader.swift */; };
 		C719F9B828674A8C001A8024 /* IImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B728674A8C001A8024 /* IImageCache.swift */; };
 		C719F9BA28674AAD001A8024 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B928674AAD001A8024 /* ImageCache.swift */; };
+		C719F9BC28674D36001A8024 /* CacheExexutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9BB28674D36001A8024 /* CacheExexutor.swift */; };
+		C719F9BE28674D7F001A8024 /* PrepareForLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		C719F9B528674691001A8024 /* IImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageLoader.swift; sourceTree = "<group>"; };
 		C719F9B728674A8C001A8024 /* IImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageCache.swift; sourceTree = "<group>"; };
 		C719F9B928674AAD001A8024 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		C719F9BB28674D36001A8024 /* CacheExexutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheExexutor.swift; sourceTree = "<group>"; };
+		C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareForLoadingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,7 @@
 				C719F9A428673DDA001A8024 /* FlickrService.swift */,
 				C719F9B32867467B001A8024 /* ImageLoader.swift */,
 				C719F9B928674AAD001A8024 /* ImageCache.swift */,
+				C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				C719F9A228673DB8001A8024 /* IFlickrService.swift */,
 				C719F9B528674691001A8024 /* IImageLoader.swift */,
 				C719F9B728674A8C001A8024 /* IImageCache.swift */,
+				C719F9BB28674D36001A8024 /* CacheExexutor.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -444,6 +450,7 @@
 				C719F9A528673DDA001A8024 /* FlickrService.swift in Sources */,
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
 				C719F9B2286744BC001A8024 /* BaseViewController.swift in Sources */,
+				C719F9BC28674D36001A8024 /* CacheExexutor.swift in Sources */,
 				C719F9B628674691001A8024 /* IImageLoader.swift in Sources */,
 				C719F9B42867467B001A8024 /* ImageLoader.swift in Sources */,
 				C719F9B828674A8C001A8024 /* IImageCache.swift in Sources */,
@@ -453,6 +460,7 @@
 				C719F9AA28673EF7001A8024 /* FlickrPhotos.swift in Sources */,
 				C719F99E28673D10001A8024 /* GalleryAssembly.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
+				C719F9BE28674D7F001A8024 /* PrepareForLoadingService.swift in Sources */,
 				C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */,
 				C719F9A328673DB8001A8024 /* IFlickrService.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,
