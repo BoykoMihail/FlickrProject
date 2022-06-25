@@ -21,24 +21,28 @@ class GalleryController: BaseViewController, IGalleryView {
         tableView.delegate = self
         return tableView
     }()
-        
+    
     var presenter: IGalleryPresenter?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Flickr's Gallery"
         presenter?.viewDidLoad()
+        
     }
     // MARK: - Setting Views
     
     override func addSubViews() {
+        super.addSubViews()
         view.addSubview(tableView)
     }
     
     // MARK: - Setting Constraints
     
     override func setupConstraints() {
+        super.setupConstraints()
+        
         let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
@@ -63,21 +67,36 @@ extension GalleryController: UITableViewDelegate {
 extension GalleryController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+        guard let presenter = presenter else {
+            return .zero
+        }
+        
+        let photo = presenter.photos[indexPath.row]
+        guard photo.width != 0 else {
+            return .zero
+        }
+        
+        let koef = CGFloat(photo.height)/CGFloat(photo.width)
+        let currentHeight = koef*self.view.bounds.width
+        
+        return currentHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        presenter?.photos.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: .tableViewCellIdentifier, for: indexPath) as? ImageCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: .tableViewCellIdentifier, for: indexPath) as? ImageCell,
+              let presenter = presenter else {
             return UITableViewCell()
         }
 
         cell.clearImage()
+        presenter.getImageFor(index: indexPath.row) {
+            cell.lazyImage = $0
+        }
         
-        cell.backgroundColor = .blue
         
         return cell
     }

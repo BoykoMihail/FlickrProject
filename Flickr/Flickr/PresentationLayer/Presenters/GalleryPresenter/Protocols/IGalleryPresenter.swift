@@ -13,5 +13,7 @@ protocol IGalleryPresenter {
     func loadPhotos()
     func getImageFor(index: Int, completion: @escaping (UIImage) -> ())
     func didTapCell(indexPath: Int)
+    
+    var photos: [FlickrPhoto] { get }
 }
 
