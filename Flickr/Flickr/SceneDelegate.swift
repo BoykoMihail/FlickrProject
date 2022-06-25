@@ -15,13 +15,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         FlickrService()
     }()
     
+    lazy var imageLoader: IImageLoader = {
+        ImageLoader()
+    }()
+    
+    lazy var galleryAssembly: GalleryAssembly = {
+        GalleryAssembly(flickrService: flickrService, imageLoader: imageLoader)
+    }()
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
         let navigationController = UINavigationController()
-        navigationController.viewControllers = [GalleryAssembly(flickrService: flickrService).assembly()]
+        navigationController.viewControllers = [galleryAssembly.assembly()]
 
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

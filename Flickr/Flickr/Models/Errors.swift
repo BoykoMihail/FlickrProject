@@ -13,3 +13,8 @@ enum FlickrServiceCustomErrors: Error {
     case ephtyData
     case decodeError
 }
+
+enum ImageLoaderCustomErrors: Error {
+    case imageLoaderError
+    case emphtyImage
+}

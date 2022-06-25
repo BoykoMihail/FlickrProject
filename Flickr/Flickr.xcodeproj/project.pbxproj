@@ -27,6 +27,8 @@
 		C719F9AC28673F0F001A8024 /* FetchPhotosResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9AB28673F0F001A8024 /* FetchPhotosResult.swift */; };
 		C719F9AF286741D3001A8024 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9AE286741D3001A8024 /* Errors.swift */; };
 		C719F9B2286744BC001A8024 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B1286744BC001A8024 /* BaseViewController.swift */; };
+		C719F9B42867467B001A8024 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B32867467B001A8024 /* ImageLoader.swift */; };
+		C719F9B628674691001A8024 /* IImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B528674691001A8024 /* IImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		C719F9AB28673F0F001A8024 /* FetchPhotosResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPhotosResult.swift; sourceTree = "<group>"; };
 		C719F9AE286741D3001A8024 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		C719F9B1286744BC001A8024 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C719F9B32867467B001A8024 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		C719F9B528674691001A8024 /* IImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +261,7 @@
 			children = (
 				C719F9A128673DAC001A8024 /* Protocols */,
 				C719F9A428673DDA001A8024 /* FlickrService.swift */,
+				C719F9B32867467B001A8024 /* ImageLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				C719F9A228673DB8001A8024 /* IFlickrService.swift */,
+				C719F9B528674691001A8024 /* IImageLoader.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -432,6 +438,8 @@
 				C719F9A528673DDA001A8024 /* FlickrService.swift in Sources */,
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
 				C719F9B2286744BC001A8024 /* BaseViewController.swift in Sources */,
+				C719F9B628674691001A8024 /* IImageLoader.swift in Sources */,
+				C719F9B42867467B001A8024 /* ImageLoader.swift in Sources */,
 				C719F9A828673E6E001A8024 /* FlickrPhoto.swift in Sources */,
 				C719F9AF286741D3001A8024 /* Errors.swift in Sources */,
 				C719F9AA28673EF7001A8024 /* FlickrPhotos.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 final class GalleryPresenter: IGalleryPresenter {
     
     private let flickrService: IFlickrService
+    private let imageLoader: IImageLoader
+
     private var isUpdating = false
     
     private let concurrentQueue = DispatchQueue(label: "gallerypresenter.concurrent.queue", attributes: .concurrent)
@@ -19,8 +21,10 @@ final class GalleryPresenter: IGalleryPresenter {
 
     var photos: [FlickrPhoto] = []
     
-    init(flickrService: IFlickrService) {
+    init(flickrService: IFlickrService,
+         imageLoader: IImageLoader) {
         self.flickrService = flickrService
+        self.imageLoader = imageLoader
     }
     
     func viewDidLoad() {
@@ -80,7 +84,23 @@ final class GalleryPresenter: IGalleryPresenter {
             return
         }
 
-        completion(UIImage())
+        imageLoader.downloadImage(from: url) { [weak self] error, image in
+            
+            if let error = error {
+                self?.handleError(with: error)
+                return
+            }
+            
+            guard let image = image else {
+                self?.handleError(with: ImageLoaderCustomErrors.emphtyImage)
+                return
+            }
+            self?.lock.lock()
+            self?.photos[index].image = image
+            self?.lock.unlock()
+            
+            completion(image)
+        }
     }
     
     func didTapCell(indexPath: Int) { }
