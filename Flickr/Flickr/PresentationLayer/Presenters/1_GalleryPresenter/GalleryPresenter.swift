@@ -7,6 +7,10 @@
 
 import UIKit
 
+private extension Int {
+    static let amountOfFirstLevelCash = 200
+}
+
 final class GalleryPresenter: IGalleryPresenter {
     
     private let flickrService: IFlickrService
@@ -131,7 +135,7 @@ final class GalleryPresenter: IGalleryPresenter {
     func clearImage(index: Int) {
         concurrentQueue.async {
             for i in (0..<self.photos.count){
-                if abs(i-index) > 70, self.photos[i].image != nil {
+                if abs(i-index) > Int.amountOfFirstLevelCash/2, self.photos[i].image != nil {
                     self.lock.lock()
                     self.photos[i].image = nil
                     self.lock.unlock()

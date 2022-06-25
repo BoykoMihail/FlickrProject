@@ -11,6 +11,10 @@ private extension String {
     static let tableViewCellIdentifier = "ImageCell"
 }
 
+private extension Int {
+    static let numberOfCellWhenItNeedsToUpdate = 2
+}
+
 class GalleryController: BaseViewController, IGalleryView {
     
     private lazy var tableView: UITableView = {
@@ -109,7 +113,7 @@ extension GalleryController: UITableViewDataSource {
             cell.lazyImage = $0
         }
         
-        if indexPath.row > presenter.photos.count - 5 {
+        if indexPath.row > presenter.photos.count - Int.numberOfCellWhenItNeedsToUpdate {
             DispatchQueue.global(qos: .background).async {
                 presenter.clearImage(index: indexPath.row)
             }
