@@ -33,6 +33,13 @@
 		C719F9BA28674AAD001A8024 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9B928674AAD001A8024 /* ImageCache.swift */; };
 		C719F9BC28674D36001A8024 /* CacheExexutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9BB28674D36001A8024 /* CacheExexutor.swift */; };
 		C719F9BE28674D7F001A8024 /* PrepareForLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */; };
+		C719F9C32867541C001A8024 /* IDetailsImageViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9C22867541C001A8024 /* IDetailsImageViewAssembly.swift */; };
+		C719F9C52867542F001A8024 /* DetailsImageViewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9C42867542F001A8024 /* DetailsImageViewAssembly.swift */; };
+		C719F9C728675458001A8024 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9C628675458001A8024 /* DetailsViewModel.swift */; };
+		C719F9CB28675494001A8024 /* IImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9CA28675494001A8024 /* IImageDetailView.swift */; };
+		C719F9CD286754A6001A8024 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */; };
+		C719F9D1286754E0001A8024 /* IImageDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D0286754E0001A8024 /* IImageDetailViewPresenter.swift */; };
+		C719F9D3286754F2001A8024 /* ImageDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +90,13 @@
 		C719F9B928674AAD001A8024 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		C719F9BB28674D36001A8024 /* CacheExexutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheExexutor.swift; sourceTree = "<group>"; };
 		C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareForLoadingService.swift; sourceTree = "<group>"; };
+		C719F9C22867541C001A8024 /* IDetailsImageViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDetailsImageViewAssembly.swift; sourceTree = "<group>"; };
+		C719F9C42867542F001A8024 /* DetailsImageViewAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsImageViewAssembly.swift; sourceTree = "<group>"; };
+		C719F9C628675458001A8024 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		C719F9CA28675494001A8024 /* IImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageDetailView.swift; sourceTree = "<group>"; };
+		C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
+		C719F9D0286754E0001A8024 /* IImageDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageDetailViewPresenter.swift; sourceTree = "<group>"; };
+		C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +215,7 @@
 		C719F99028673B0D001A8024 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				C719F9CE286754CC001A8024 /* ImageDetailViewPresenter */,
 				C719F99128673B1D001A8024 /* GalleryPresenter */,
 			);
 			path = Presenters;
@@ -234,6 +249,7 @@
 		C719F99828673BC5001A8024 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C719F9C828675481001A8024 /* IImageDetailView */,
 				C719F9B0286744B3001A8024 /* Base */,
 				C719F989286737AC001A8024 /* GalleryController */,
 			);
@@ -243,6 +259,7 @@
 		C719F99B28673CFD001A8024 /* Assemplyes */ = {
 			isa = PBXGroup;
 			children = (
+				C719F9C028675405001A8024 /* DetailsImageViewAssembly */,
 				C719F99C28673D09001A8024 /* GalleryAssembly */,
 			);
 			path = Assemplyes;
@@ -292,6 +309,7 @@
 			children = (
 				C719F9AD286741C4001A8024 /* Api */,
 				C719F9AE286741D3001A8024 /* Errors.swift */,
+				C719F9C628675458001A8024 /* DetailsViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +330,57 @@
 				C719F9B1286744BC001A8024 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		C719F9C028675405001A8024 /* DetailsImageViewAssembly */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9C12867540B001A8024 /* Protocol */,
+				C719F9C42867542F001A8024 /* DetailsImageViewAssembly.swift */,
+			);
+			path = DetailsImageViewAssembly;
+			sourceTree = "<group>";
+		};
+		C719F9C12867540B001A8024 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9C22867541C001A8024 /* IDetailsImageViewAssembly.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C719F9C828675481001A8024 /* IImageDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9C928675485001A8024 /* Protocol */,
+				C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */,
+			);
+			path = IImageDetailView;
+			sourceTree = "<group>";
+		};
+		C719F9C928675485001A8024 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9CA28675494001A8024 /* IImageDetailView.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C719F9CE286754CC001A8024 /* ImageDetailViewPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9CF286754D4001A8024 /* Protocol */,
+				C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */,
+			);
+			path = ImageDetailViewPresenter;
+			sourceTree = "<group>";
+		};
+		C719F9CF286754D4001A8024 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9D0286754E0001A8024 /* IImageDetailViewPresenter.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */,
+				C719F9CD286754A6001A8024 /* ImageDetailViewController.swift in Sources */,
 				C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */,
 				C719F9AC28673F0F001A8024 /* FetchPhotosResult.swift in Sources */,
 				C719F9A528673DDA001A8024 /* FlickrService.swift in Sources */,
@@ -453,8 +523,12 @@
 				C719F9BC28674D36001A8024 /* CacheExexutor.swift in Sources */,
 				C719F9B628674691001A8024 /* IImageLoader.swift in Sources */,
 				C719F9B42867467B001A8024 /* ImageLoader.swift in Sources */,
+				C719F9C32867541C001A8024 /* IDetailsImageViewAssembly.swift in Sources */,
+				C719F9C52867542F001A8024 /* DetailsImageViewAssembly.swift in Sources */,
+				C719F9C728675458001A8024 /* DetailsViewModel.swift in Sources */,
 				C719F9B828674A8C001A8024 /* IImageCache.swift in Sources */,
 				C719F9BA28674AAD001A8024 /* ImageCache.swift in Sources */,
+				C719F9D1286754E0001A8024 /* IImageDetailViewPresenter.swift in Sources */,
 				C719F9A828673E6E001A8024 /* FlickrPhoto.swift in Sources */,
 				C719F9AF286741D3001A8024 /* Errors.swift in Sources */,
 				C719F9AA28673EF7001A8024 /* FlickrPhotos.swift in Sources */,
@@ -463,7 +537,9 @@
 				C719F9BE28674D7F001A8024 /* PrepareForLoadingService.swift in Sources */,
 				C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */,
 				C719F9A328673DB8001A8024 /* IFlickrService.swift in Sources */,
+				C719F9CB28675494001A8024 /* IImageDetailView.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,
+				C719F9D3286754F2001A8024 /* ImageDetailViewPresenter.swift in Sources */,
 				C719F98F28673A01001A8024 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
