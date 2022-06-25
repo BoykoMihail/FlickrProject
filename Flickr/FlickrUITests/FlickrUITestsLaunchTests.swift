@@ -1,13 +1,13 @@
 //
-//  Tests_macOSLaunchTests.swift
-//  Tests macOS
+//  FlickrUITestsLaunchTests.swift
+//  FlickrUITests
 //
 //  Created by Михаил Бойко on 25.06.2022.
 //
 
 import XCTest
 
-class Tests_macOSLaunchTests: XCTestCase {
+class FlickrUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
