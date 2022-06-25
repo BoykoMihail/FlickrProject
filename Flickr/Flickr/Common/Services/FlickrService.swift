@@ -60,6 +60,41 @@ class FlickrService: IFlickrService {
 extension FlickrService: CacheExexutor {
     
     func warmUpCache(onCompletion: @escaping CacheExexutorResponse) {
-        debugPrint("//// warmUpCache ")
+        let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=\(Flickr.applicationKey)&extras=url_m&per_page=200&page=\(currentPage)&format=json&nojsoncallback=1"
+        
+        guard let url: NSURL = NSURL(string: urlString) else {
+            onCompletion(nil)
+            return
+        }
+        
+        let searchTask = URLSession
+            .shared
+            .dataTask(with: url as URL) { data, response, error -> Void in
+            
+                if error != nil {
+                    onCompletion(nil)
+                    return
+                }
+                
+                guard let data = data else {
+                    onCompletion(nil)
+                    return
+                }
+                
+                guard let parsedResult = try? JSONDecoder().decode(FetchPhotosResult.self, from: data) else {
+                    onCompletion(nil)
+                    return
+                }
+                            
+                let urls: [URL] = parsedResult.photos.photo.compactMap {
+                    guard let url = URL(string: $0.photoUrl) else {
+                        return nil
+                    }
+                    
+                    return url
+                }
+                onCompletion(urls)
+        }
+        searchTask.resume()
     }
 }
