@@ -12,4 +12,3 @@ typealias FlickrResponse = (Error?, [FlickrPhoto]?) -> Void
 protocol IFlickrService {
     func fetchPhotos(onCompletion: @escaping FlickrResponse)
 }
-

@@ -11,6 +11,7 @@ final class GalleryPresenter: IGalleryPresenter {
     
     private let flickrService: IFlickrService
     private let imageLoader: IImageLoader
+    private let router: IMainGalleryRouter
     
     private var isUpdating = false
     private let concurrentQueue = DispatchQueue(label: "gallerypresenter.concurrent.queue", attributes: .concurrent)
@@ -21,9 +22,11 @@ final class GalleryPresenter: IGalleryPresenter {
     var photos: [FlickrPhoto] = []
     
     init(flickrService: IFlickrService,
-         imageLoader: IImageLoader) {
+         imageLoader: IImageLoader,
+         router: IMainGalleryRouter) {
         self.flickrService = flickrService
         self.imageLoader = imageLoader
+        self.router = router
     }
     
     func viewDidLoad() {
@@ -118,13 +121,17 @@ final class GalleryPresenter: IGalleryPresenter {
             return
         }
         
-        debugPrint("///// image not nil")
+        let size = CGSize(width: photo.width, height: photo.height)
+        let viewModel = DetailsViewModel(image: image,
+                                         name: photo.title,
+                                         size: size)
+        router.moveToDetailsImageView(viewModel: viewModel)
     }
     
     func clearImage(index: Int) {
         concurrentQueue.async {
             for i in (0..<self.photos.count){
-                if abs(i-index) > 20, self.photos[i].image != nil {
+                if abs(i-index) > 70, self.photos[i].image != nil {
                     self.lock.lock()
                     self.photos[i].image = nil
                     self.lock.unlock()

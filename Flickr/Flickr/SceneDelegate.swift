@@ -10,24 +10,37 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private let navigationController = UINavigationController()
 
-    lazy var flickrService = {
+    private lazy var flickrService = {
         FlickrService()
     }()
     
-    lazy var imageCache = {
+    private lazy var imageCache = {
         ImageCache()
     }()
     
-    lazy var imageLoader = {
+    private lazy var imageLoader = {
         ImageLoader(imageCash: imageCache)
     }()
     
-    lazy var galleryAssembly = {
-        GalleryAssembly(flickrService: flickrService, imageLoader: imageLoader)
+    private lazy var detailsImageViewAssembly = {
+        DetailsImageViewAssembly()
     }()
     
-    lazy var prepareForLoadingService = {
+    private lazy var galleryAssembly = {
+        GalleryAssembly(flickrService: flickrService,
+                        imageLoader: imageLoader,
+                        router: mainGalleryRouter)
+    }()
+    
+    private lazy var mainGalleryRouter = {
+        MainGalleryRouter(navigationController: navigationController,
+                          detailsImageViewAssembly: detailsImageViewAssembly)
+    }()
+    
+    private lazy var prepareForLoadingService = {
         PrepareForLoadingService(cacheExexutor: flickrService,
                                  imageLoader: imageLoader)
     }()
@@ -38,7 +51,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         prepareForLoadingService.prepareForLoading()
         
-        let navigationController = UINavigationController()
         navigationController.viewControllers = [galleryAssembly.assembly()]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

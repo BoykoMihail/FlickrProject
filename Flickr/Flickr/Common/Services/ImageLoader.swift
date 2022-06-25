@@ -36,4 +36,3 @@ final class ImageLoader: IImageLoader {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }
-

@@ -40,6 +40,8 @@
 		C719F9CD286754A6001A8024 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */; };
 		C719F9D1286754E0001A8024 /* IImageDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D0286754E0001A8024 /* IImageDetailViewPresenter.swift */; };
 		C719F9D3286754F2001A8024 /* ImageDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */; };
+		C719F9D628675592001A8024 /* MainGalleryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D528675592001A8024 /* MainGalleryRouter.swift */; };
+		C719F9D9286755B2001A8024 /* IMainGalleryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9D8286755B2001A8024 /* IMainGalleryRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		C719F9CC286754A6001A8024 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		C719F9D0286754E0001A8024 /* IImageDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IImageDetailViewPresenter.swift; sourceTree = "<group>"; };
 		C719F9D2286754F2001A8024 /* ImageDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewPresenter.swift; sourceTree = "<group>"; };
+		C719F9D528675592001A8024 /* MainGalleryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGalleryRouter.swift; sourceTree = "<group>"; };
+		C719F9D8286755B2001A8024 /* IMainGalleryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMainGalleryRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 		C719F98828673799001A8024 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C719F9D428675586001A8024 /* Routers */,
 				C719F99B28673CFD001A8024 /* Assemplyes */,
 				C719F99828673BC5001A8024 /* Controllers */,
 				C719F99028673B0D001A8024 /* Presenters */,
@@ -383,6 +388,23 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		C719F9D428675586001A8024 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9D7286755A7001A8024 /* Protocols */,
+				C719F9D528675592001A8024 /* MainGalleryRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		C719F9D7286755A7001A8024 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C719F9D8286755B2001A8024 /* IMainGalleryRouter.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +557,8 @@
 				C719F99E28673D10001A8024 /* GalleryAssembly.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
 				C719F9BE28674D7F001A8024 /* PrepareForLoadingService.swift in Sources */,
+				C719F9D9286755B2001A8024 /* IMainGalleryRouter.swift in Sources */,
+				C719F9D628675592001A8024 /* MainGalleryRouter.swift in Sources */,
 				C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */,
 				C719F9A328673DB8001A8024 /* IFlickrService.swift in Sources */,
 				C719F9CB28675494001A8024 /* IImageDetailView.swift in Sources */,
