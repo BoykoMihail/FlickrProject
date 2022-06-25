@@ -17,6 +17,9 @@
 		C719F97C2867373C001A8024 /* FlickrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */; };
 		C719F98B286737BD001A8024 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F98A286737BD001A8024 /* GalleryController.swift */; };
 		C719F98F28673A01001A8024 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F98E28673A01001A8024 /* ImageCell.swift */; };
+		C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99328673B32001A8024 /* IGalleryPresenter.swift */; };
+		C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99528673B5D001A8024 /* GalleryPresenter.swift */; };
+		C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F99928673BD3001A8024 /* IGalleryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		C719F97B2867373C001A8024 /* FlickrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C719F98A286737BD001A8024 /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 		C719F98E28673A01001A8024 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		C719F99328673B32001A8024 /* IGalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGalleryPresenter.swift; sourceTree = "<group>"; };
+		C719F99528673B5D001A8024 /* GalleryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryPresenter.swift; sourceTree = "<group>"; };
+		C719F99928673BD3001A8024 /* IGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGalleryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +138,9 @@
 		C719F98828673799001A8024 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C719F99828673BC5001A8024 /* Controllers */,
+				C719F99028673B0D001A8024 /* Presenters */,
 				C719F98C286739D5001A8024 /* Views */,
-				C719F989286737AC001A8024 /* GalleryController */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 		C719F989286737AC001A8024 /* GalleryController */ = {
 			isa = PBXGroup;
 			children = (
+				C719F99728673BB9001A8024 /* Protocols */,
 				C719F98A286737BD001A8024 /* GalleryController.swift */,
 			);
 			path = GalleryController;
@@ -160,6 +168,47 @@
 				C719F98E28673A01001A8024 /* ImageCell.swift */,
 			);
 			path = ImageCell;
+			sourceTree = "<group>";
+		};
+		C719F99028673B0D001A8024 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99128673B1D001A8024 /* GalleryPresenter */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		C719F99128673B1D001A8024 /* GalleryPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99228673B26001A8024 /* Protocols */,
+				C719F99528673B5D001A8024 /* GalleryPresenter.swift */,
+			);
+			path = GalleryPresenter;
+			sourceTree = "<group>";
+		};
+		C719F99228673B26001A8024 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99328673B32001A8024 /* IGalleryPresenter.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C719F99728673BB9001A8024 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C719F99928673BD3001A8024 /* IGalleryView.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C719F99828673BC5001A8024 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C719F989286737AC001A8024 /* GalleryController */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,9 +341,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */,
+				C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */,
 				C719F95D2867373B001A8024 /* ViewController.swift in Sources */,
 				C719F9592867373B001A8024 /* AppDelegate.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
+				C719F99428673B32001A8024 /* IGalleryPresenter.swift in Sources */,
 				C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */,
 				C719F98F28673A01001A8024 /* ImageCell.swift in Sources */,
 			);

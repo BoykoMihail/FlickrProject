@@ -11,7 +11,7 @@ private extension String {
     static let tableViewCellIdentifier = "ImageCell"
 }
 
-class GalleryController: UIViewController {
+class GalleryController: UIViewController, IGalleryView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -46,6 +46,10 @@ class GalleryController: UIViewController {
             tableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor),
             tableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor),
         ])
+    }
+    
+    func updateData() {
+        tableView.reloadData()
     }
 }
 
