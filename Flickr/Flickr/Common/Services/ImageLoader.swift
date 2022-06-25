@@ -9,8 +9,12 @@ import UIKit
 
 final class ImageLoader: IImageLoader {
     
-    private var imageCash = [URL: UIImage]()
-
+    private let imageCash: IImageCache
+    
+    init(imageCash: IImageCache) {
+        self.imageCash = imageCash
+    }
+    
     func downloadImage(from url: URL, completion: @escaping ImageLoaderResponse) {
         if let image = imageCash[url] {
             completion(nil, image)

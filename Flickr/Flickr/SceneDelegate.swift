@@ -15,8 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         FlickrService()
     }()
     
+    lazy var imageCache: ImageCache = {
+        ImageCache()
+    }()
+    
     lazy var imageLoader: IImageLoader = {
-        ImageLoader()
+        ImageLoader(imageCash: imageCache)
     }()
     
     lazy var galleryAssembly: GalleryAssembly = {
