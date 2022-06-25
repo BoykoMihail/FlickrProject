@@ -33,8 +33,25 @@ class FlickrService: IFlickrService {
         
         let searchTask = URLSession
             .shared
-            .dataTask(with: url as URL) { data, response, error -> Void in
-                onCompletion(nil, nil)
+            .dataTask(with: url as URL) { [weak self] data, response, error -> Void in
+                if error != nil {
+                    onCompletion(error as NSError?, nil)
+                    return
+                }
+                
+                guard let data = data else {
+                    onCompletion(nil, nil)
+                    return
+                }
+                
+                guard let parsedResult = try? JSONDecoder().decode(FetchPhotosResult.self, from: data) else {
+                    onCompletion(nil, nil)
+                    return
+                }
+                            
+                self?.currentPage+=1
+                self?.amountOfPages = parsedResult.photos.pages
+                onCompletion(nil, parsedResult.photos.photo)
         }
         searchTask.resume()
     }
