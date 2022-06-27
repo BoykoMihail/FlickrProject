@@ -44,6 +44,11 @@ class ImageDetailViewController: BaseViewController {
             detailImage.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
+    
+    override func setupAccessibility() {
+        super.setupAccessibility()
+        view.accessibilityIdentifier = "ImageDetailViewController"
+    }
 }
 
 extension ImageDetailViewController: IImageDetailView {

@@ -57,6 +57,12 @@ class GalleryController: BaseViewController, IGalleryView {
         ])
     }
     
+    override func setupAccessibility() {
+        super.setupAccessibility()
+        view.accessibilityIdentifier = "GalleryController"
+        tableView.accessibilityIdentifier = "GalleryController_tableView"
+    }
+    
     func updateData() {
         tableView.reloadData()
     }
@@ -113,6 +119,7 @@ extension GalleryController: UITableViewDataSource {
             cell.lazyImage = $0
         }
         
+        cell.accessibilityIdentifier = String.tableViewCellIdentifier + "_\(indexPath.row)"
         if indexPath.row > presenter.photos.count - Int.numberOfCellWhenItNeedsToUpdate {
             DispatchQueue.global(qos: .background).async {
                 presenter.clearImage(index: indexPath.row)

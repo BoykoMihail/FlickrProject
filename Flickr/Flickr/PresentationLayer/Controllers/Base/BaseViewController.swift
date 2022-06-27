@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         addSubViews()
         setupConstraints()
+        setupAccessibility()
         view.backgroundColor = .white
     }
     
@@ -23,4 +24,6 @@ class BaseViewController: UIViewController {
     // MARK: - Setting Constraints
     
     internal func setupConstraints() {}
+    
+    internal func setupAccessibility() {}
 }

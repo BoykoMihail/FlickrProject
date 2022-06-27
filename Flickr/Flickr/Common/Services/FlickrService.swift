@@ -20,6 +20,31 @@ class FlickrService: IFlickrService {
     private var amountOfPages = 1
     
     func fetchPhotos(onCompletion: @escaping FlickrResponse) {
+        let uiTesting = ProcessInfo.processInfo.arguments.contains("Testing")
+        
+        guard !uiTesting else {
+            let photos = [
+                FlickrPhoto.getFlickrPhotoStub(photoId: "0",
+                                               title: "title 0"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "1",
+                                               title: "title 1"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "2",
+                                               title: "title 2"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "3",
+                                               title: "title 3"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "4",
+                                               title: "title 4"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "5",
+                                               title: "title 5"),
+                FlickrPhoto.getFlickrPhotoStub(photoId: "6",
+                                               title: "title 6")
+            ]
+                                               
+            onCompletion(nil, photos)
+            return
+                                               
+        }
+        
         if currentPage > amountOfPages {
             onCompletion(FlickrServiceCustomErrors.thisIsLastPage, nil)
             return

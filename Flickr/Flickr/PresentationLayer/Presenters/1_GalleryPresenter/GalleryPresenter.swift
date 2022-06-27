@@ -86,17 +86,14 @@ final class GalleryPresenter: IGalleryPresenter {
         lock.lock()
         let photo = photos[index]
         lock.unlock()
-        
         if let image = photo.image {
             completion(image)
             return
         }
-        
         guard let url = URL(string: photo.photoUrl) else {
             completion(UIImage())
             return
         }
-
         imageLoader.downloadImage(from: url) { [weak self] error, image in
             
             if let error = error {

@@ -23,6 +23,20 @@ struct FlickrPhoto: Decodable {
         case photoUrl = "url_m"
     }
     
+    init(photoId: String,
+         title: String,
+         height: Int,
+         width: Int,
+         photoUrl: String,
+         image: UIImage?) {
+        self.photoId = photoId
+        self.title = title
+        self.height = height
+        self.width = width
+        self.photoUrl = photoUrl
+        self.image = image
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         photoId = try container.decode(String.self, forKey: .photoId)
@@ -43,6 +57,18 @@ struct FlickrPhoto: Decodable {
         } else {
             self.photoUrl = ""
         }
-        
+    }
+}
+
+
+extension FlickrPhoto {
+    
+    static func getFlickrPhotoStub(photoId: String = "1",
+                                   title: String = "image",
+                                   height: Int = 200,
+                                   width: Int = 100,
+                                   photoUrl: String = "https://www.wikihow.com/images_en/thumb/d/db/Get-the-URL-for-Pictures-Step-2-Version-6.jpg/v4-460px-Get-the-URL-for-Pictures-Step-2-Version-6.jpg.webp",
+                                   image: UIImage? = nil) -> FlickrPhoto {
+        FlickrPhoto(photoId: photoId, title: title, height: height, width: width, photoUrl: photoUrl, image: image)
     }
 }
