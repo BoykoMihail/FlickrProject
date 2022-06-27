@@ -8,7 +8,7 @@
 import UIKit
 
 private extension Int {
-    static let amountOfFirstLevelCash = 200
+    static let amountOfFirstLevelCash = 40
 }
 
 final class GalleryPresenter: IGalleryPresenter {

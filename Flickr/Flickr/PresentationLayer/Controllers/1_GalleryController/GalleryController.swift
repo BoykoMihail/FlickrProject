@@ -12,7 +12,7 @@ private extension String {
 }
 
 private extension Int {
-    static let numberOfCellWhenItNeedsToUpdate = 2
+    static let numberOfCellWhenItNeedsToUpdate = 5
 }
 
 class GalleryController: BaseViewController, IGalleryView {
@@ -74,12 +74,6 @@ extension GalleryController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didTapCell(indexPath: indexPath.row)
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.presenter?.loadPhotos()
-        }
-    }
 }
 
 extension GalleryController: UITableViewDataSource {
@@ -124,8 +118,11 @@ extension GalleryController: UITableViewDataSource {
             DispatchQueue.global(qos: .background).async {
                 presenter.clearImage(index: indexPath.row)
             }
+            
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.presenter?.loadPhotos()
+            }
         }
-        
         
         return cell
     }
