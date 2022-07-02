@@ -9,6 +9,8 @@ import UIKit
 
 protocol IImageDetailView: AnyObject {
     
-    func updateImage(with image: UIImage, size: CGSize)
+    func updateImage(with image: UIImage, width: CGFloat, height: CGFloat)
     func updateLabel(with string: String)
+    
+    var viewWidth: CGFloat { get }
 }

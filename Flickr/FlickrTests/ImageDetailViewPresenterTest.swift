@@ -46,7 +46,7 @@ class ImageDetailViewPresenterTest: XCTestCase {
 
     func testViewDidLoad() throws {
         // given
-        
+        imageDetailViewMock.stubbedViewWidth = CGSize.defaultTestSize.width
         // when
         imageDetailViewPresenter.viewDidLoad()
         
@@ -55,8 +55,9 @@ class ImageDetailViewPresenterTest: XCTestCase {
         XCTAssertTrue(imageDetailViewMock.invokedUpdateLabel)
         
         XCTAssertEqual(imageDetailViewMock.invokedUpdateImageParameters?.image, .defaultTestImage)
-        XCTAssertEqual(imageDetailViewMock.invokedUpdateImageParameters?.size, .defaultTestSize)
-        
+        XCTAssertEqual(imageDetailViewMock.invokedUpdateImageParameters?.width, CGSize.defaultTestSize.width)
+        XCTAssertEqual(imageDetailViewMock.invokedUpdateImageParameters?.height, CGSize.defaultTestSize.height)
+
         XCTAssertEqual(imageDetailViewMock.invokedUpdateLabelParameters?.string, .defaultTestName)
     }
 }

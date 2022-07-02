@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		349F7DE22870789B00BFA379 /* ImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349F7DE12870789B00BFA379 /* ImageCellViewModel.swift */; };
+		349F7DE62870857D00BFA379 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */; };
 		C700194F286767BF006DF35C /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C700194E286767BF006DF35C /* ImageCacheTest.swift */; };
 		C719F9592867373B001A8024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F9582867373B001A8024 /* AppDelegate.swift */; };
 		C719F95B2867373B001A8024 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719F95A2867373B001A8024 /* SceneDelegate.swift */; };
@@ -82,6 +84,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		349F7DE12870789B00BFA379 /* ImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellViewModel.swift; sourceTree = "<group>"; };
+		349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		C700194E286767BF006DF35C /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
 		C719F9552867373B001A8024 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C719F9582867373B001A8024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				C719F98E28673A01001A8024 /* ImageCell.swift */,
+				349F7DE12870789B00BFA379 /* ImageCellViewModel.swift */,
 			);
 			path = ImageCell;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				C719F9A028673DA0001A8024 /* Services */,
+				349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -614,6 +620,7 @@
 			files = (
 				C719F99628673B5D001A8024 /* GalleryPresenter.swift in Sources */,
 				C719F9CD286754A6001A8024 /* ImageDetailViewController.swift in Sources */,
+				349F7DE22870789B00BFA379 /* ImageCellViewModel.swift in Sources */,
 				C719F99A28673BD3001A8024 /* IGalleryView.swift in Sources */,
 				C719F9AC28673F0F001A8024 /* FetchPhotosResult.swift in Sources */,
 				C719F9A528673DDA001A8024 /* FlickrService.swift in Sources */,
@@ -630,6 +637,7 @@
 				C719F9D1286754E0001A8024 /* IImageDetailViewPresenter.swift in Sources */,
 				C719F9A828673E6E001A8024 /* FlickrPhoto.swift in Sources */,
 				C719F9AF286741D3001A8024 /* Errors.swift in Sources */,
+				349F7DE62870857D00BFA379 /* ThreadSafeArray.swift in Sources */,
 				C719F9AA28673EF7001A8024 /* FlickrPhotos.swift in Sources */,
 				C719F99E28673D10001A8024 /* GalleryAssembly.swift in Sources */,
 				C719F98B286737BD001A8024 /* GalleryController.swift in Sources */,
@@ -759,7 +767,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -813,7 +821,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -830,6 +838,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49G77KD6LG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flickr/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -856,6 +865,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49G77KD6LG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flickr/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -884,7 +894,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -910,7 +920,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

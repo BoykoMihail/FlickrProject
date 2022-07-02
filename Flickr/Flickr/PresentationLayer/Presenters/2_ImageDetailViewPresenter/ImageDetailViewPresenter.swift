@@ -18,7 +18,14 @@ final class ImageDetailViewPresenter: IImageDetailViewPresenter {
     }
     
     func viewDidLoad() {
-        view?.updateImage(with: viewModel.image, size: viewModel.size)
-        view?.updateLabel(with: viewModel.name)
+        guard let view = view else {
+            return
+        }
+        
+        let koef = viewModel.size.height/viewModel.size.width
+        let currentHeight = koef*view.viewWidth
+
+        view.updateImage(with: viewModel.image, width: view.viewWidth, height: currentHeight)
+        view.updateLabel(with: viewModel.name)
     }
 }

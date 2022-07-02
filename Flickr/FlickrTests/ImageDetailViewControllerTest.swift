@@ -72,8 +72,8 @@ class ImageDetailViewControllerTest: XCTestCase {
         let expectedSize = CGSize(width: imageDetailViewController.view.bounds.width, height: currentHeight)
         
         // when
-        imageDetailViewController.updateImage(with: expectedImage, size: parametrSize)
-        
+        imageDetailViewController.updateImage(with: expectedImage, width: expectedSize.width, height: expectedSize.height)
+                
         // then
         
         guard let imageView = imageDetailViewController.view.subviews.first as? UIImageView else {

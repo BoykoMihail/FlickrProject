@@ -17,19 +17,6 @@ final class ImageCell: UITableViewCell {
         return imageView
     }()
     
-    var lazyImage: UIImage? {
-        didSet{
-            guard let lazyImage = lazyImage else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.flickrImageView.image = lazyImage
-                self.lazyImage = nil
-            }
-        }
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -47,8 +34,12 @@ final class ImageCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func clearImage() {
-        flickrImageView.image = nil
+    func configure(with viewModel: ImageCellViewModel) {
+        viewModel.getImageFromUrl { image in
+            DispatchQueue.main.async {
+                self.flickrImageView.image = image
+            }
+        }
     }
     
     private func setupViews() {

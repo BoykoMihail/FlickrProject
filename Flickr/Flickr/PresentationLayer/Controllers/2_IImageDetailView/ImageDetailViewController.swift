@@ -53,15 +53,16 @@ class ImageDetailViewController: BaseViewController {
 
 extension ImageDetailViewController: IImageDetailView {
     
-    func updateImage(with image: UIImage, size: CGSize) {
+    var viewWidth: CGFloat {
+        view.bounds.width
+    }
+    
+    func updateImage(with image: UIImage, width: CGFloat, height: CGFloat) {
         detailImage.image = image
 
-        let koef = size.height/size.width
-        let currentHeight = koef*self.view.bounds.width
+        
 
-        let newSize = CGSize(width: view.bounds.width, height: currentHeight)
-
-        detailImage.frame.size = newSize
+        detailImage.frame.size = CGSize(width: width, height: height)
         
         let safeArea = view.safeAreaLayoutGuide
         
@@ -69,7 +70,7 @@ extension ImageDetailViewController: IImageDetailView {
             detailImage.widthAnchor.constraint(equalTo: safeArea.widthAnchor),
             detailImage.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             detailImage.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            detailImage.heightAnchor.constraint(equalToConstant: newSize.height)
+            detailImage.heightAnchor.constraint(equalToConstant: height)
         ])
     }
     

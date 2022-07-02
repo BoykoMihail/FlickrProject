@@ -11,10 +11,6 @@ private extension String {
     static let tableViewCellIdentifier = "ImageCell"
 }
 
-private extension Int {
-    static let numberOfCellWhenItNeedsToUpdate = 5
-}
-
 class GalleryController: BaseViewController, IGalleryView {
     
     private lazy var tableView: UITableView = {
@@ -31,7 +27,7 @@ class GalleryController: BaseViewController, IGalleryView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Flickr's Gallery"
+        title = presenter?.title
         presenter?.viewDidLoad()
         
     }
@@ -47,14 +43,14 @@ class GalleryController: BaseViewController, IGalleryView {
     override func setupConstraints() {
         super.setupConstraints()
         
-        let safeArea = view.safeAreaLayoutGuide
-
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            tableView.widthAnchor.constraint(equalTo: safeArea.widthAnchor),
-            tableView.heightAnchor.constraint(equalTo: safeArea.heightAnchor),
-        ])
+        if let view = view {
+            NSLayoutConstraint.activate([
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+                tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            ])
+        }
     }
     
     override func setupAccessibility() {
@@ -83,15 +79,8 @@ extension GalleryController: UITableViewDataSource {
             return .zero
         }
         
-        let photo = presenter.photos[indexPath.row]
-        guard photo.width != 0 else {
-            return .zero
-        }
-        
-        let koef = CGFloat(photo.height)/CGFloat(photo.width)
-        let currentHeight = koef*self.view.bounds.width
-        
-        return currentHeight
+        return presenter.getCellHeight(index: indexPath.row,
+                                       viewWidth: view.bounds.width)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,7 +88,7 @@ extension GalleryController: UITableViewDataSource {
             return .zero
         }
         
-        return presenter.photos.count
+        return presenter.countOfPhotos
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,21 +97,10 @@ extension GalleryController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.clearImage()
-        presenter.getImageFor(index: indexPath.row) {
-            cell.lazyImage = $0
-        }
+        let viewModel = presenter.getCellViewModelFor(index: indexPath.row)
+        cell.configure(with: viewModel)
         
         cell.accessibilityIdentifier = String.tableViewCellIdentifier + "_\(indexPath.row)"
-        if indexPath.row > presenter.photos.count - Int.numberOfCellWhenItNeedsToUpdate {
-            DispatchQueue.global(qos: .background).async {
-                presenter.clearImage(index: indexPath.row)
-            }
-            
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.presenter?.loadPhotos()
-            }
-        }
         
         return cell
     }

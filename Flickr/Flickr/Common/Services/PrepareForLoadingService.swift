@@ -22,8 +22,8 @@ final class PrepareForLoadingService {
         DispatchQueue.global(qos: .userInitiated).async {
             self.cacheExexutor.warmUpCache { [weak self] imageUrls in
                 if let imageUrls = imageUrls {
-                    imageUrls.forEach{
-                        self?.imageLoader.downloadImage(from: $0) { _,_ in }
+                    DispatchQueue.concurrentPerform(iterations: imageUrls.count) { index in
+                        self?.imageLoader.downloadImage(from: imageUrls[index]) { _,_ in }
                     }
                 }
             }

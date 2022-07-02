@@ -12,10 +12,10 @@ class MainGalleryRouterMock: IMainGalleryRouter {
 
     var invokedMoveToDetailsImageView = false
     var invokedMoveToDetailsImageViewCount = 0
-    var invokedMoveToDetailsImageViewParameters: (viewModel: DetailsViewModel, Void)?
-    var invokedMoveToDetailsImageViewParametersList = [(viewModel: DetailsViewModel, Void)]()
+    var invokedMoveToDetailsImageViewParameters: (viewModel: FlickrPhoto, Void)?
+    var invokedMoveToDetailsImageViewParametersList = [(viewModel: FlickrPhoto, Void)]()
 
-    func moveToDetailsImageView(viewModel: DetailsViewModel) {
+    func moveToDetailsImageView(viewModel: FlickrPhoto) {
         invokedMoveToDetailsImageView = true
         invokedMoveToDetailsImageViewCount += 1
         invokedMoveToDetailsImageViewParameters = (viewModel, ())

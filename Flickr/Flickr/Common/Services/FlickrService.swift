@@ -14,6 +14,25 @@ private struct Flickr {
     static let perPage = 30
 }
 
+private extension FlickrPhoto {
+    static let flickrPhotos = [
+        FlickrPhoto.getFlickrPhotoStub(photoId: "0",
+                                       title: "title 0"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "1",
+                                       title: "title 1"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "2",
+                                       title: "title 2"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "3",
+                                       title: "title 3"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "4",
+                                       title: "title 4"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "5",
+                                       title: "title 5"),
+        FlickrPhoto.getFlickrPhotoStub(photoId: "6",
+                                       title: "title 6")
+    ]
+}
+
 class FlickrService: IFlickrService {
     
     private var currentPage = 1
@@ -23,22 +42,7 @@ class FlickrService: IFlickrService {
         let uiTesting = ProcessInfo.processInfo.arguments.contains("Testing")
         
         guard !uiTesting else {
-            let photos = [
-                FlickrPhoto.getFlickrPhotoStub(photoId: "0",
-                                               title: "title 0"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "1",
-                                               title: "title 1"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "2",
-                                               title: "title 2"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "3",
-                                               title: "title 3"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "4",
-                                               title: "title 4"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "5",
-                                               title: "title 5"),
-                FlickrPhoto.getFlickrPhotoStub(photoId: "6",
-                                               title: "title 6")
-            ]
+            let photos = FlickrPhoto.flickrPhotos
                                                
             onCompletion(nil, photos)
             return
@@ -85,7 +89,7 @@ class FlickrService: IFlickrService {
 extension FlickrService: CacheExexutor {
     
     func warmUpCache(onCompletion: @escaping CacheExexutorResponse) {
-        let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=\(Flickr.applicationKey)&extras=url_m&per_page=200&page=\(currentPage)&format=json&nojsoncallback=1"
+        let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=\(Flickr.applicationKey)&extras=url_m&per_page=100&page=\(currentPage)&format=json&nojsoncallback=1"
         
         guard let url: NSURL = NSURL(string: urlString) else {
             onCompletion(nil)

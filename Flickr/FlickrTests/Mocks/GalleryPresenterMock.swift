@@ -10,14 +10,24 @@ import UIKit
 
 class GalleryPresenterMock: IGalleryPresenter {
 
-    var invokedPhotosGetter = false
-    var invokedPhotosGetterCount = 0
-    var stubbedPhotos: [FlickrPhoto]! = []
+    var invokedTitleGetter = false
+    var invokedTitleGetterCount = 0
+    var stubbedTitle: String! = ""
 
-    var photos: [FlickrPhoto] {
-        invokedPhotosGetter = true
-        invokedPhotosGetterCount += 1
-        return stubbedPhotos
+    var title: String {
+        invokedTitleGetter = true
+        invokedTitleGetterCount += 1
+        return stubbedTitle
+    }
+
+    var invokedCountOfPhotosGetter = false
+    var invokedCountOfPhotosGetterCount = 0
+    var stubbedCountOfPhotos: Int! = 0
+
+    var countOfPhotos: Int {
+        invokedCountOfPhotosGetter = true
+        invokedCountOfPhotosGetterCount += 1
+        return stubbedCountOfPhotos
     }
 
     var invokedViewDidLoad = false
@@ -26,34 +36,6 @@ class GalleryPresenterMock: IGalleryPresenter {
     func viewDidLoad() {
         invokedViewDidLoad = true
         invokedViewDidLoadCount += 1
-    }
-
-    var invokedLoadPhotos = false
-    var invokedLoadPhotosCount = 0
-    var callBackForLoadPhotosExpectation: (() -> ())?
-    
-    func loadPhotos() {
-        invokedLoadPhotos = true
-        invokedLoadPhotosCount += 1
-        callBackForLoadPhotosExpectation?()
-    }
-
-    var invokedGetImageFor = false
-    var invokedGetImageForCount = 0
-    var invokedGetImageForParameters: (index: Int, Void)?
-    var invokedGetImageForParametersList = [(index: Int, Void)]()
-    var stubbedGetImageForCompletionResult: (UIImage, Void)?
-    var callBackForGetImageForExpectation: (() -> ())?
-
-    func getImageFor(index: Int, completion: @escaping (UIImage) -> ()) {
-        invokedGetImageFor = true
-        invokedGetImageForCount += 1
-        invokedGetImageForParameters = (index, ())
-        invokedGetImageForParametersList.append((index, ()))
-        callBackForGetImageForExpectation?()
-        if let result = stubbedGetImageForCompletionResult {
-            completion(result.0)
-        }
     }
 
     var invokedDidTapCell = false
@@ -68,17 +50,31 @@ class GalleryPresenterMock: IGalleryPresenter {
         invokedDidTapCellParametersList.append((indexPath, ()))
     }
 
-    var invokedClearImage = false
-    var invokedClearImageCount = 0
-    var invokedClearImageParameters: (index: Int, Void)?
-    var invokedClearImageParametersList = [(index: Int, Void)]()
-    var callBackForClearImageExpectation: (() -> ())?
+    var invokedGetCellHeight = false
+    var invokedGetCellHeightCount = 0
+    var invokedGetCellHeightParameters: (index: Int, viewWidth: CGFloat)?
+    var invokedGetCellHeightParametersList = [(index: Int, viewWidth: CGFloat)]()
+    var stubbedGetCellHeightResult: CGFloat!
 
-    func clearImage(index: Int) {
-        invokedClearImage = true
-        invokedClearImageCount += 1
-        invokedClearImageParameters = (index, ())
-        invokedClearImageParametersList.append((index, ()))
-        callBackForClearImageExpectation?()
+    func getCellHeight(index: Int, viewWidth: CGFloat) -> CGFloat {
+        invokedGetCellHeight = true
+        invokedGetCellHeightCount += 1
+        invokedGetCellHeightParameters = (index, viewWidth)
+        invokedGetCellHeightParametersList.append((index, viewWidth))
+        return stubbedGetCellHeightResult
+    }
+
+    var invokedGetCellViewModelFor = false
+    var invokedGetCellViewModelForCount = 0
+    var invokedGetCellViewModelForParameters: (index: Int, Void)?
+    var invokedGetCellViewModelForParametersList = [(index: Int, Void)]()
+    var stubbedGetCellViewModelForResult: ImageCellViewModel!
+
+    func getCellViewModelFor(index: Int) -> ImageCellViewModel {
+        invokedGetCellViewModelFor = true
+        invokedGetCellViewModelForCount += 1
+        invokedGetCellViewModelForParameters = (index, ())
+        invokedGetCellViewModelForParametersList.append((index, ()))
+        return stubbedGetCellViewModelForResult
     }
 }

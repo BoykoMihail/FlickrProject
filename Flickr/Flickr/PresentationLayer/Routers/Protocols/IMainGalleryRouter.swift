@@ -8,5 +8,5 @@
 import Foundation
 
 protocol IMainGalleryRouter {
-    func moveToDetailsImageView(viewModel: DetailsViewModel)
+    func moveToDetailsImageView(viewModel: FlickrPhoto)
 }

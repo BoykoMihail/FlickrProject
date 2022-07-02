@@ -10,10 +10,10 @@ import UIKit
 protocol IGalleryPresenter {
     
     func viewDidLoad()
-    func loadPhotos()
-    func getImageFor(index: Int, completion: @escaping (UIImage) -> ())
     func didTapCell(indexPath: Int)
-    func clearImage(index: Int)
+    func getCellHeight(index: Int, viewWidth: CGFloat) -> CGFloat
+    func getCellViewModelFor(index: Int) -> ImageCellViewModel
     
-    var photos: [FlickrPhoto] { get }
+    var title: String { get }
+    var countOfPhotos: Int { get }
 }

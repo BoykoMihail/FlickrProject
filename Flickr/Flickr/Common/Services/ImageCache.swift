@@ -8,12 +8,10 @@
 import UIKit
 
 private extension Int {
-    static let defaultCountLimit = 300
+    static let defaultCountLimit = 200
 }
 
 final class ImageCache {
-    
-    private let concurrentCashQueue = DispatchQueue(label: "gallerypresenter.concurrent.cash.queue", attributes: .concurrent)
 
     private lazy var imageCache: NSCache<AnyObject, UIImage> = {
         let cache = NSCache<AnyObject, UIImage>()
@@ -32,9 +30,7 @@ final class ImageCache {
 extension ImageCache: IImageCache {
     
     func removeAll() {
-        concurrentCashQueue.async(flags: .barrier) {
-            self.imageCache.removeAllObjects()
-        }
+        imageCache.removeAllObjects()
     }
     
     private func insert(_ image: UIImage?, for url: URL) {
@@ -42,25 +38,15 @@ extension ImageCache: IImageCache {
             return remove(for: url)
         }
     
-        concurrentCashQueue.async(flags: .barrier) {
-            self.imageCache.setObject(image, forKey: url as AnyObject)
-        }
+        imageCache.setObject(image, forKey: url as AnyObject)
     }
 
     private func remove(for url: URL) {
-        concurrentCashQueue.async(flags: .barrier) {
-            self.imageCache.removeObject(forKey: url as AnyObject)
-        }
+        imageCache.removeObject(forKey: url as AnyObject)
     }
     
     private func image(for url: URL) -> UIImage? {
-        var image: UIImage? = nil
-        
-        concurrentCashQueue.sync {
-            image = self.imageCache.object(forKey: url as AnyObject)
-        }
-        
-        if let image = image {
+        if let image = imageCache.object(forKey: url as AnyObject) {
             return image
         }
         
