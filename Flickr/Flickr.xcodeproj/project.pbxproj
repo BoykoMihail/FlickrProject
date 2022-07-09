@@ -221,6 +221,24 @@
 			path = GlobalAssembly;
 			sourceTree = "<group>";
 		};
+		3493E7E02879ECCD00ACDD34 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3493E7E22879ED1600ACDD34 /* Protocols */,
+				349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */,
+				3493E76D2879D40400ACDD34 /* ImageCache.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3493E7E22879ED1600ACDD34 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3493E76F2879D40F00ACDD34 /* IImageCache.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		C719F94C2867373B001A8024 = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +262,9 @@
 		C719F9572867373B001A8024 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				3493E7E02879ECCD00ACDD34 /* Helpers */,
 				C719F9A628673E3E001A8024 /* Models */,
-				C719F99F28673D99001A8024 /* Common */,
+				C719F99F28673D99001A8024 /* Services */,
 				C719F98828673799001A8024 /* PresentationLayer */,
 				C719F9582867373B001A8024 /* AppDelegate.swift */,
 				C719F95A2867373B001A8024 /* SceneDelegate.swift */,
@@ -384,16 +403,7 @@
 			path = 1_GalleryAssembly;
 			sourceTree = "<group>";
 		};
-		C719F99F28673D99001A8024 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				C719F9A028673DA0001A8024 /* Services */,
-				349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		C719F9A028673DA0001A8024 /* Services */ = {
+		C719F99F28673D99001A8024 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				3493E75E2879A9D900ACDD34 /* NetworkLayer */,
@@ -402,7 +412,6 @@
 				C719F9B32867467B001A8024 /* ImageLoader.swift */,
 				C719F9BD28674D7F001A8024 /* PrepareForLoadingService.swift */,
 				3493E76A2879B6E400ACDD34 /* PaginatorHelper.swift */,
-				3493E76D2879D40400ACDD34 /* ImageCache.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -410,7 +419,6 @@
 		C719F9A128673DAC001A8024 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				3493E76F2879D40F00ACDD34 /* IImageCache.swift */,
 				C719F9A228673DB8001A8024 /* IFlickrService.swift */,
 				C719F9B528674691001A8024 /* IImageLoader.swift */,
 				C719F9BB28674D36001A8024 /* CacheExexutor.swift */,
