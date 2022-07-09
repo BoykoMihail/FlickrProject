@@ -33,15 +33,17 @@ class PrepareForLoadingServiceTest: XCTestCase {
     
     func testCallWarmUpCache() throws {
         // given
-        let expectation = expectation(description: "WarmUpCache")
+        let expectation = expectation(description: "testCallWarmUpCache")
 
         // when
-        cacheExexutorMock.stubbedWarmUpCacheOnCompletionResult = (nil, ())
+        cacheExexutorMock.stubbedWarmUpCacheResult = []
         prepareForLoadingService.prepareForLoading()
-        cacheExexutorMock.callBackForWarmUpCacheExpectation = {
+        cacheExexutorMock.invokedWarmUpCacheCallBack = {
             expectation.fulfill()
         }
+        
         wait(for: [expectation], timeout: 1.0)
+
         // then
         XCTAssertTrue(cacheExexutorMock.invokedWarmUpCache)
     }
@@ -49,25 +51,27 @@ class PrepareForLoadingServiceTest: XCTestCase {
     func testDownloadImage() throws {
         // given
         let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=1111&extras=url_m&per_page=30&page=1&format=json&nojsoncallback=1"
-        let expectation = expectation(description: "DownloadImage")
+        let expectation = expectation(description: "testDownloadImage")
 
         guard let url: URL = URL(string: urlString) else {
             XCTFail("Строка не сконвертировалась в URL")
             return
         }
         
-        cacheExexutorMock.stubbedWarmUpCacheOnCompletionResult = ([url], ())
-        imageLoaderMock.stubbedDownloadImageCompletionResult = (nil, UIImage())
-        imageLoaderMock.callBackForDownloadImageExpectation = {
-            expectation.fulfill()
-        }
+        cacheExexutorMock.stubbedWarmUpCacheResult = [url]
+        imageLoaderMock.stubbedImageResult = UIImage()
+
         // when
         prepareForLoadingService.prepareForLoading()
+        imageLoaderMock.invokedImageCallBack = {
+            expectation.fulfill()
+        }
+        
         wait(for: [expectation], timeout: 1.0)
 
         // then
-        XCTAssertTrue(imageLoaderMock.invokedDownloadImage)
-        XCTAssertEqual(imageLoaderMock.invokedDownloadImageCount, 1)
-        XCTAssertEqual(imageLoaderMock.invokedDownloadImageParameters?.url, url)
+        XCTAssertTrue(imageLoaderMock.invokedImage)
+        XCTAssertEqual(imageLoaderMock.invokedImageCount, 1)
+        XCTAssertEqual(imageLoaderMock.invokedImageParameters?.url, url)
     }
 }

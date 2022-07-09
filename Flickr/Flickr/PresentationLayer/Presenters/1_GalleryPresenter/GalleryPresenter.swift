@@ -98,7 +98,7 @@ final class GalleryPresenter: IGalleryPresenter {
     
     func didTapCell(indexPath: Int) {
         let photo = photos[indexPath]
-        
+
         guard let photo = photo else {
             return
         }

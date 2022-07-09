@@ -12,19 +12,19 @@ class GalleryAssemblyTest: XCTestCase {
 
     private var galleryAssembly: GalleryAssembly!
     
-    private var flickrServiceMock: FlickrServiceMock!
+    private var paginatorHelperMock: PaginatorHelperMock!
     private var imageLoaderMock: ImageLoaderMock!
     private var mainGalleryRouterMock: MainGalleryRouterMock!
     
     override func setUp() {
         super.setUp()
         
-        flickrServiceMock = FlickrServiceMock()
+        paginatorHelperMock = PaginatorHelperMock()
         imageLoaderMock = ImageLoaderMock()
         mainGalleryRouterMock = MainGalleryRouterMock()
         
         galleryAssembly = GalleryAssembly(
-            flickrService: flickrServiceMock,
+            paginatorHelper: paginatorHelperMock,
             imageLoader: imageLoaderMock,
             router: mainGalleryRouterMock
         )
@@ -34,7 +34,7 @@ class GalleryAssemblyTest: XCTestCase {
         super.tearDown()
         
         galleryAssembly = nil
-        flickrServiceMock = nil
+        paginatorHelperMock = nil
         imageLoaderMock = nil
         mainGalleryRouterMock = nil
     }

@@ -12,16 +12,19 @@ class CacheExexutorMock: CacheExexutor {
 
     var invokedWarmUpCache = false
     var invokedWarmUpCacheCount = 0
-    var stubbedWarmUpCacheOnCompletionResult: ([URL]?, Void)?
-    var callBackForWarmUpCacheExpectation: (() -> ())?
+    var invokedWarmUpCacheParameters: (perPage: Int, page: Int)?
+    var invokedWarmUpCacheParametersList = [(perPage: Int, page: Int)]()
+    var stubbedWarmUpCacheResult: CacheExexutorResponse!
+    var invokedWarmUpCacheCallBack: (() -> ())?
 
-    func warmUpCache(onCompletion: @escaping CacheExexutorResponse) {
+    func warmUpCache(perPage: Int, page: Int) async -> CacheExexutorResponse{
         invokedWarmUpCache = true
         invokedWarmUpCacheCount += 1
-        
-        if let result = stubbedWarmUpCacheOnCompletionResult {
-            onCompletion(result.0)
-            callBackForWarmUpCacheExpectation?()
+        invokedWarmUpCacheParameters = (perPage, page)
+        invokedWarmUpCacheParametersList.append((perPage, page))
+        if let callBack = invokedWarmUpCacheCallBack {
+            callBack()
         }
+        return stubbedWarmUpCacheResult
     }
 }

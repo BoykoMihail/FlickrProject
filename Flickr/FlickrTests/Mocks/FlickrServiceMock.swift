@@ -12,13 +12,15 @@ class FlickrServiceMock: IFlickrService {
 
     var invokedFetchPhotos = false
     var invokedFetchPhotosCount = 0
-    var stubbedFetchPhotosOnCompletionResult: (Error?, [FlickrPhoto]?)?
+    var invokedFetchPhotosParameters: (perPage: Int, page: Int)?
+    var invokedFetchPhotosParametersList = [(perPage: Int, page: Int)]()
+    var stubbedFetchPhotosResult: FlickrResponse!
 
-    func fetchPhotos(onCompletion: @escaping FlickrResponse) {
+    func fetchPhotos(perPage: Int, page: Int) async -> FlickrResponse {
         invokedFetchPhotos = true
         invokedFetchPhotosCount += 1
-        if let result = stubbedFetchPhotosOnCompletionResult {
-            onCompletion(result.0, result.1)
-        }
+        invokedFetchPhotosParameters = (perPage, page)
+        invokedFetchPhotosParametersList.append((perPage, page))
+        return stubbedFetchPhotosResult
     }
 }

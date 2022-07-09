@@ -10,21 +10,27 @@ import UIKit
 
 class ImageLoaderMock: IImageLoader {
 
-    var invokedDownloadImage = false
-    var invokedDownloadImageCount = 0
-    var invokedDownloadImageParameters: (url: URL, Void)?
-    var invokedDownloadImageParametersList = [(url: URL, Void)]()
-    var stubbedDownloadImageCompletionResult: (Error?, UIImage?)?
-    var callBackForDownloadImageExpectation: (() -> ())?
+    var invokedImage = false
+    var invokedImageCount = 0
+    var invokedImageParameters: (url: URL, Void)?
+    var invokedImageParametersList = [(url: URL, Void)]()
+    var stubbedImageResult: UIImage!
+    var stubbedImageError: Error?
+    var invokedImageCallBack: (() -> ())?
 
-    func downloadImage(from url: URL, completion: @escaping ImageLoaderResponse) {
-        invokedDownloadImage = true
-        invokedDownloadImageCount += 1
-        invokedDownloadImageParameters = (url, ())
-        invokedDownloadImageParametersList.append((url, ()))
-        if let result = stubbedDownloadImageCompletionResult {
-            completion(result.0, result.1)
-            callBackForDownloadImageExpectation?()
+    func image(from url: URL) async throws -> UIImage? {
+        invokedImage = true
+        invokedImageCount += 1
+        invokedImageParameters = (url, ())
+        invokedImageParametersList.append((url, ()))
+        if let callBack = invokedImageCallBack {
+            callBack()
         }
+        
+        if let error = stubbedImageError {
+            throw error
+        }
+        
+        return stubbedImageResult
     }
 }

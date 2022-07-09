@@ -22,7 +22,7 @@ class ImageLoaderTest: XCTestCase {
         super.setUp()
         
         imageCacheMock = ImageCacheMock()
-        imageLoader = ImageLoader(imageCache: imageCacheMock)
+        imageLoader = ImageLoader(cache: imageCacheMock)
     }
     
     override func tearDown() {
@@ -32,11 +32,10 @@ class ImageLoaderTest: XCTestCase {
         imageCacheMock = nil
     }
 
-    func testDownloadImageFromCache() throws {
+    func testDownloadImageFromCache() async throws {
         // given
         let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=1111&extras=url_m&per_page=30&page=1&format=json&nojsoncallback=1"
         imageCacheMock.stubbedSubscriptResult = .defaultTestImage
-        let expectation = expectation(description: "DownloadImage")
 
         // when
         guard let url: URL = URL(string: urlString) else {
@@ -44,28 +43,20 @@ class ImageLoaderTest: XCTestCase {
             return
         }
         
-        var resultImage: UIImage?
-        var resultError: Error?
         // when
-        imageLoader.downloadImage(from: url) { error, image  in
-            resultError = error
-            resultImage = image
-            expectation.fulfill()
-        }
+        let result = try await imageLoader.image(from: url)
         
-        wait(for: [expectation], timeout: 1.0)
         // then
         
         XCTAssert(imageCacheMock.invokedSubscriptGetter)
-        XCTAssertNil(resultError)
-        XCTAssertNotNil(resultImage)
-        XCTAssertEqual(resultImage, .defaultTestImage)
+        
+        XCTAssertNotNil(result)
+        XCTAssertEqual(result, .defaultTestImage)
     }
     
-    func testDownloadImageError() throws {
+    func testDownloadImageError() async throws {
         // given
         let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=1111&extras=url_m&per_page=30&page=1&format=json&nojsoncallback=1"
-        let expectation = expectation(description: "DownloadImage")
 
         // when
         guard let url: URL = URL(string: urlString) else {
@@ -73,21 +64,16 @@ class ImageLoaderTest: XCTestCase {
             return
         }
         
-        var resultImage: UIImage?
-        var resultError: Error?
         // when
-        imageLoader.downloadImage(from: url) { error, image  in
-            resultError = error
-            resultImage = image
-            expectation.fulfill()
+        
+        do {
+            let _ = try await imageLoader.image(from: url)
+            XCTFail("Ожидалась ошибка")
+        } catch {
+            // then
+            XCTAssert(imageCacheMock.invokedSubscriptGetter)
+            XCTAssertNotNil(error)
+            XCTAssert(error is ImageLoaderCustomErrors)
         }
-        
-        wait(for: [expectation], timeout: 1.0)
-        // then
-        
-        XCTAssert(imageCacheMock.invokedSubscriptGetter)
-        XCTAssertNotNil(resultError)
-        XCTAssertNil(resultImage)
-        XCTAssert(resultError is ImageLoaderCustomErrors)
     }
 }

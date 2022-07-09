@@ -105,9 +105,7 @@ class GalleryControllerTest: XCTestCase {
     
     func testHeightOfCell() throws {
         // given
-//        galleryPresenterMock.stubbedPhotos = [
-//            FlickrPhoto.getFlickrPhotoStub(photoId: "1", height: .customHeight, width: .customWidth)
-//        ]
+
         galleryPresenterMock.stubbedCountOfPhotos = 2
         galleryPresenterMock.stubbedGetCellViewModelForResult = .init(getImageblock: { blok in
             blok(UIImage())
@@ -122,35 +120,9 @@ class GalleryControllerTest: XCTestCase {
             return
         }
         
-//        let koef = CGFloat(Int.customHeight)/CGFloat(Int.customWidth)
-//        let currentHeight = koef*galleryController.view.bounds.width
-        
         // then
         XCTAssertEqual(galleryController.tableView(tableView, heightForRowAt: .zero), .customHeight)
     }
-    
-//    func testCallLoadPhotos() throws {
-//        // given
-//        galleryPresenterMock.stubbedPhotos = [
-//            FlickrPhoto.getFlickrPhotoStub(photoId: "1")
-//        ]
-//        let expectation = expectation(description: "Loading photos")
-//        // when
-//
-//        guard let tableView = galleryController.view.subviews.first as? UITableView else {
-//            XCTFail("Не отобразилась tableView")
-//            return
-//        }
-//        galleryPresenterMock.callBackForLoadPhotosExpectation = {
-//            expectation.fulfill()
-//        }
-//
-//        galleryController.scrollViewDidEndDragging(tableView, willDecelerate: true)
-//        wait(for: [expectation], timeout: 1.0)
-//
-//        // then
-//        XCTAssertTrue(galleryPresenterMock.invokedLoadPhotos)
-//    }
     
     func testDidTapCellLogic() throws {
         // given

@@ -16,6 +16,7 @@
 		3493E76E2879D40400ACDD34 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493E76D2879D40400ACDD34 /* ImageCache.swift */; };
 		3493E7702879D40F00ACDD34 /* IImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493E76F2879D40F00ACDD34 /* IImageCache.swift */; };
 		3493E7DF2879E7CF00ACDD34 /* GlobalAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493E7DE2879E7CF00ACDD34 /* GlobalAssembly.swift */; };
+		3493E7E42879EFD000ACDD34 /* PaginatorHelperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493E7E32879EFD000ACDD34 /* PaginatorHelperMock.swift */; };
 		349F7DE22870789B00BFA379 /* ImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349F7DE12870789B00BFA379 /* ImageCellViewModel.swift */; };
 		349F7DE62870857D00BFA379 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */; };
 		C700194F286767BF006DF35C /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C700194E286767BF006DF35C /* ImageCacheTest.swift */; };
@@ -63,7 +64,6 @@
 		C777B6212868B16C00F28077 /* FlickrServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C777B6202868B16C00F28077 /* FlickrServiceMock.swift */; };
 		C777B6232868B1DB00F28077 /* MainGalleryRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C777B6222868B1DB00F28077 /* MainGalleryRouterMock.swift */; };
 		C777B6262868B31C00F28077 /* FlickrPhotoStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C777B6252868B31C00F28077 /* FlickrPhotoStubs.swift */; };
-		C7A18874286A059D0098FD51 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A18873286A059C0098FD51 /* TestError.swift */; };
 		C7A18876286A06170098FD51 /* GalleryControllerUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A18875286A06170098FD51 /* GalleryControllerUITest.swift */; };
 		C7A18878286A12960098FD51 /* ImageDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A18877286A12950098FD51 /* ImageDetailViewControllerTest.swift */; };
 		C7A1887A286A15010098FD51 /* ImageDetailViewPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A18879286A15010098FD51 /* ImageDetailViewPresenterTest.swift */; };
@@ -100,6 +100,7 @@
 		3493E76D2879D40400ACDD34 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		3493E76F2879D40F00ACDD34 /* IImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IImageCache.swift; sourceTree = "<group>"; };
 		3493E7DE2879E7CF00ACDD34 /* GlobalAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAssembly.swift; sourceTree = "<group>"; };
+		3493E7E32879EFD000ACDD34 /* PaginatorHelperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorHelperMock.swift; sourceTree = "<group>"; };
 		349F7DE12870789B00BFA379 /* ImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellViewModel.swift; sourceTree = "<group>"; };
 		349F7DE52870857D00BFA379 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeArray.swift; sourceTree = "<group>"; };
 		C700194E286767BF006DF35C /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		C777B6202868B16C00F28077 /* FlickrServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrServiceMock.swift; sourceTree = "<group>"; };
 		C777B6222868B1DB00F28077 /* MainGalleryRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGalleryRouterMock.swift; sourceTree = "<group>"; };
 		C777B6252868B31C00F28077 /* FlickrPhotoStubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrPhotoStubs.swift; sourceTree = "<group>"; };
-		C7A18873286A059C0098FD51 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		C7A18875286A06170098FD51 /* GalleryControllerUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryControllerUITest.swift; sourceTree = "<group>"; };
 		C7A18877286A12950098FD51 /* ImageDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewControllerTest.swift; sourceTree = "<group>"; };
 		C7A18879286A15010098FD51 /* ImageDetailViewPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewPresenterTest.swift; sourceTree = "<group>"; };
@@ -534,8 +534,8 @@
 				C74CF6752867B2C200461D6C /* ImageDetailViewPresenterMock.swift */,
 				C777B6202868B16C00F28077 /* FlickrServiceMock.swift */,
 				C777B6222868B1DB00F28077 /* MainGalleryRouterMock.swift */,
-				C7A18873286A059C0098FD51 /* TestError.swift */,
 				C7A18881286A228B0098FD51 /* ImageCacheMock.swift */,
+				3493E7E32879EFD000ACDD34 /* PaginatorHelperMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -737,12 +737,12 @@
 				C74CF6662867AADF00461D6C /* CacheExexutorMock.swift in Sources */,
 				C777B6232868B1DB00F28077 /* MainGalleryRouterMock.swift in Sources */,
 				C7A1887E286A21650098FD51 /* DetailsImageViewAssemblyTest.swift in Sources */,
+				3493E7E42879EFD000ACDD34 /* PaginatorHelperMock.swift in Sources */,
 				C700194F286767BF006DF35C /* ImageCacheTest.swift in Sources */,
 				C777B6262868B31C00F28077 /* FlickrPhotoStubs.swift in Sources */,
 				C74CF66E2867AC0100461D6C /* PrepareForLoadingServiceTest.swift in Sources */,
 				C74CF6682867AB9E00461D6C /* ImageLoaderMock.swift in Sources */,
 				C74CF6722867B24500461D6C /* GalleryViewMock.swift in Sources */,
-				C7A18874286A059D0098FD51 /* TestError.swift in Sources */,
 				C7A1887A286A15010098FD51 /* ImageDetailViewPresenterTest.swift in Sources */,
 				C777B61D2868B05C00F28077 /* GalleryPresenterTest.swift in Sources */,
 			);
