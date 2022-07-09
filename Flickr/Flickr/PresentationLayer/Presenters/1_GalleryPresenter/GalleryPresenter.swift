@@ -8,17 +8,16 @@
 import UIKit
 
 private extension Int {
-    static let amountOfFirstLevelCash = 40
-    static let numberOfCellWhenItNeedsToUpdate = 5
+    static let amountOfFirstLevelCache = 60
+    static let numberOfCellWhenItNeedsToUpdate = 15
 }
+
 
 final class GalleryPresenter: IGalleryPresenter {
     
-    private let flickrService: IFlickrService
+    private let paginatorHelper: IPaginatorHelper
     private let imageLoader: IImageLoader
     private let router: IMainGalleryRouter
-    
-    private let concurrentQueue = DispatchQueue(label: "gallerypresenter.concurrent.queue", attributes: .concurrent)
     
     private var isUpdating = false
     
@@ -32,34 +31,43 @@ final class GalleryPresenter: IGalleryPresenter {
     
     weak var viewController: IGalleryView?
     
-    init(flickrService: IFlickrService,
+    init(paginatorHelper: IPaginatorHelper,
          imageLoader: IImageLoader,
          router: IMainGalleryRouter) {
-        self.flickrService = flickrService
+        self.paginatorHelper = paginatorHelper
         self.imageLoader = imageLoader
         self.router = router
     }
     
     func viewDidLoad() {
-        loadPhotos()
+        guard !isUpdating else {
+            return
+        }
+        
+        isUpdating = true
+        
+        Task(priority: .high) {
+            let flickrPhoto = await paginatorHelper.loadInitialData()
+            
+            fetchPhotosHandler(flickrPhoto)
+            isUpdating = false
+        }
     }
     
     func getCellViewModelFor(index: Int) -> ImageCellViewModel {
         
         getCellViewModelOn(index: index)
         
-        let defaultBlock: GetImageblock = { block in
-            block(UIImage())
-        }
+        
         
         guard index < countOfPhotos else {
-            return ImageCellViewModel(getImageblock: defaultBlock)
+            return .defaultImageCellViewModel
         }
         
         let photo = photos[index]
         
         guard let photo = photo else {
-            return ImageCellViewModel(getImageblock: defaultBlock)
+            return .defaultImageCellViewModel
         }
         
         if let image = photo.image {
@@ -69,12 +77,18 @@ final class GalleryPresenter: IGalleryPresenter {
         }
         
         guard let url = URL(string: photo.photoUrl) else {
-            return ImageCellViewModel(getImageblock: defaultBlock)
+            return .defaultImageCellViewModel
         }
         
-        let result = ImageCellViewModel { [weak self] block in
-            self?.getImageFor(url: url) { image in
-                self?.photos[index]?.image = image
+        let task = Task(priority: .high) { () -> UIImage in
+            let image = await getImageFor(url: url)
+            photos[index]?.image = image
+            return image
+        }
+        
+        let result = ImageCellViewModel { block in
+            Task {
+                let image = await task.value
                 block(image)
             }
         }
@@ -115,79 +129,90 @@ final class GalleryPresenter: IGalleryPresenter {
         }
         
         isUpdating = true
-        flickrService.fetchPhotos { [weak self] error, flickrPhoto in
-            self?.fetchPhotosHandler(flickrPhoto, error)
-            self?.isUpdating = false
+        
+        Task(priority: .high) {
+            let flickrPhoto = await paginatorHelper.loadNextPage()
+            
+            fetchPhotosHandler(flickrPhoto)
+            isUpdating = false
         }
     }
     
-    private func fetchPhotosHandler(_ flickrPhoto: [FlickrPhoto]?, _ error: Error?) {
-        if let error = error {
+    private func fetchPhotosHandler(_ flickrResponse: PaginatorHelperResult) {
+        
+        switch flickrResponse {
+        case let .success(fetchPhotosResult):
+            updatePhotosModel(flickrPhoto: fetchPhotosResult)
+        case let .failure(error):
             handleError(with: error)
-            return
         }
-        
-        guard let flickrPhoto = flickrPhoto else {
-            handleError(with: FlickrServiceCustomErrors.ephtyData)
-            return
-        }
-        
-        updatePhotosModel(flickrPhoto: flickrPhoto)
 
-        DispatchQueue.main.async {
-            self.viewController?.updateData()
+        Task { @MainActor in
+            viewController?.updateData()
         }
     }
     
     private func getCellViewModelOn(index: Int) {
-        concurrentQueue.async {
-            if index > self.countOfPhotos - Int.numberOfCellWhenItNeedsToUpdate {
-                self.clearImage(index: index)
-                self.loadPhotos()
+        Task(priority: .background) {
+            if index > countOfPhotos - Int.numberOfCellWhenItNeedsToUpdate {
+//                clearImage(index: index)
+                loadPhotos()
             }
         }
     }
     
-    private func clearImage(index: Int) {
-        DispatchQueue.concurrentPerform(iterations: countOfPhotos) { i in
-            if abs(i-index) > Int.amountOfFirstLevelCash/2,
-               self.photos[i]?.image != nil {
-                self.photos[i]?.image = nil
-            }
-        }
-    }
+//    private func clearImage(index: Int) {
+//        Task(priority: .background) {
+//            (0..<countOfPhotos).forEach { i in
+//                if abs(i-index) > Int.amountOfFirstLevelCache/2,
+//                   photos[i]?.image != nil {
+//                    photos[i]?.image = nil
+//                }
+//            }
+//        }
+//    }
     
     private func updatePhotosModel(flickrPhoto: [FlickrPhoto]) {
         photos.append(contentsOf: flickrPhoto)
         let to = self.countOfPhotos
         let from = Swift.max(0, to - flickrPhoto.count)
         
-        DispatchQueue.concurrentPerform(iterations: to - from) { i in
-            if let photo = self.photos[from + i],
+        (0..<(to - from)).forEach { i in
+            if let photo = photos[from + i],
                let url = URL(string: photo.photoUrl)  {
-                self.getImageFor(url: url) { _ in }
+                Task(priority: .background) {
+                    let image = await getImageFor(url: url)
+                    photos[from + i]?.image = image
+                }
             }
         }
     }
     
-    private func getImageFor(url: URL, completion: @escaping (UIImage) -> ()) {
-        imageLoader.downloadImage(from: url) { [weak self] error, image in
-            
-            if let error = error {
-                self?.handleError(with: error)
-                return
+    private func getImageFor(url: URL) async -> (UIImage) {
+        do {
+            guard let image = try await imageLoader.image(from: url) else {
+                throw ImageLoaderCustomErrors.emphtyImage
             }
             
-            guard let image = image else {
-                self?.handleError(with: ImageLoaderCustomErrors.emphtyImage)
-                return
-            }
-            
-            completion(image)
+            return image
+        } catch {
+            handleError(with: error)
+            return UIImage()
         }
     }
     
     private func handleError(with error: Error) {
         /// Обработчик ошибки
     }
+}
+
+
+private struct Const {
+    static let defaultBlock: GetImageblock = { block in
+        block(UIImage())
+    }
+}
+
+private extension ImageCellViewModel {
+    static let defaultImageCellViewModel = ImageCellViewModel(getImageblock: Const.defaultBlock)
 }

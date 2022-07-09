@@ -11,24 +11,24 @@ import Metal
 
 final class ThreadSafeArray<Element> {
     
-    private let concurrentCashQueue = DispatchQueue(label: "gallerypresenter.concurrent.cash.queue", attributes: .concurrent)
+    private let concurrentThreadSafeQueue = DispatchQueue(label: "Thread.concurrent.queue", attributes: .concurrent)
 
     private var array = Array<Element>()
     
     func removeAll() {
-        concurrentCashQueue.async(flags: .barrier) {
+        concurrentThreadSafeQueue.async(flags: .barrier) {
             self.array.removeAll()
         }
     }
     
     func append(_ newElement: Element) {
-        concurrentCashQueue.async(flags: .barrier) {
+        concurrentThreadSafeQueue.async(flags: .barrier) {
             self.array.append(newElement)
         }
     }
     
     func append<S>(contentsOf: S) where S: Sequence, Element == S.Element {
-        concurrentCashQueue.async(flags: .barrier) {
+        concurrentThreadSafeQueue.async(flags: .barrier) {
             self.array.append(contentsOf: contentsOf)
         }
     }
@@ -36,7 +36,7 @@ final class ThreadSafeArray<Element> {
     var count: Int {
         var count: Int = 0
         
-        concurrentCashQueue.sync {
+        concurrentThreadSafeQueue.syncIfNotMain {
             count = self.array.count
         }
         
@@ -54,7 +54,7 @@ extension ThreadSafeArray {
             
             var result: Element? = nil
             
-            concurrentCashQueue.sync {
+            concurrentThreadSafeQueue.syncIfNotMain {
                 result = self.array[i]
             }
             
@@ -63,9 +63,23 @@ extension ThreadSafeArray {
         
         set {
             guard let newValue = newValue else { return }
-            concurrentCashQueue.async(flags: .barrier) {
+            concurrentThreadSafeQueue.async(flags: .barrier) {
                 self.array[i] = newValue
             }
+        }
+    }
+}
+
+
+extension DispatchQueue {
+    func syncIfNotMain(execute block: () -> Void) {
+        guard !Thread.isMainThread else {
+            block()
+            return
+        }
+        
+        sync {
+            block()
         }
     }
 }

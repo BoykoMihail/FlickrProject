@@ -7,8 +7,6 @@
 
 import UIKit
 
-typealias ImageLoaderResponse = (Error?, UIImage?) -> Void
-
 protocol IImageLoader {
-    func downloadImage(from url: URL, completion: @escaping ImageLoaderResponse)
+    func image(from url: URL) async throws -> UIImage?
 }

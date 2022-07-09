@@ -19,14 +19,17 @@ final class PrepareForLoadingService {
     }
     
     func prepareForLoading() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.cacheExexutor.warmUpCache { [weak self] imageUrls in
-                if let imageUrls = imageUrls {
-                    DispatchQueue.concurrentPerform(iterations: imageUrls.count) { index in
-                        self?.imageLoader.downloadImage(from: imageUrls[index]) { _,_ in }
+        Task(priority: .background) {
+            let imageUrls = await cacheExexutor.warmUpCache(perPage: 200,
+                                                            page: 0)
+            if let imageUrls = imageUrls {
+                imageUrls.forEach { url in
+                    Task(priority: .background) {
+                        try await imageLoader.image(from: url)
                     }
                 }
             }
         }
+        
     }
 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-typealias CacheExexutorResponse = ([URL]?) -> Void
+typealias CacheExexutorResponse = [URL]?
 
 protocol CacheExexutor {
-    func warmUpCache(onCompletion: @escaping CacheExexutorResponse)
+    func warmUpCache(perPage: Int, page: Int) async -> CacheExexutorResponse
 }

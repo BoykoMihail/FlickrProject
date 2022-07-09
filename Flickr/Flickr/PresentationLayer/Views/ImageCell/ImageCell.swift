@@ -26,8 +26,8 @@ final class ImageCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
         flickrImageView.image = nil
+        super.prepareForReuse()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +36,7 @@ final class ImageCell: UITableViewCell {
     
     func configure(with viewModel: ImageCellViewModel) {
         viewModel.getImageFromUrl { image in
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 self.flickrImageView.image = image
             }
         }

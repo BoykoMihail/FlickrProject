@@ -9,21 +9,21 @@ import UIKit
 
 final class GalleryAssembly {
     
-    private let flickrService: IFlickrService
+    private let paginatorHelper: IPaginatorHelper
     private let imageLoader: IImageLoader
     private let router: IMainGalleryRouter
     
-    init(flickrService: IFlickrService,
+    init(paginatorHelper: IPaginatorHelper,
          imageLoader: IImageLoader,
          router: IMainGalleryRouter) {
-        self.flickrService = flickrService
+        self.paginatorHelper = paginatorHelper
         self.imageLoader = imageLoader
         self.router = router
     }
     
     func assembly() -> UIViewController {
         let controller = GalleryController()
-        let presenter = GalleryPresenter(flickrService: flickrService,
+        let presenter = GalleryPresenter(paginatorHelper: paginatorHelper,
                                          imageLoader: imageLoader,
                                          router: router)
         controller.presenter = presenter

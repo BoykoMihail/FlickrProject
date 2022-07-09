@@ -22,7 +22,7 @@ class ImageLoaderTest: XCTestCase {
         super.setUp()
         
         imageCacheMock = ImageCacheMock()
-        imageLoader = ImageLoader(imageCash: imageCacheMock)
+        imageLoader = ImageLoader(imageCache: imageCacheMock)
     }
     
     override func tearDown() {
@@ -32,7 +32,7 @@ class ImageLoaderTest: XCTestCase {
         imageCacheMock = nil
     }
 
-    func testDownloadImageFromCash() throws {
+    func testDownloadImageFromCache() throws {
         // given
         let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=1111&extras=url_m&per_page=30&page=1&format=json&nojsoncallback=1"
         imageCacheMock.stubbedSubscriptResult = .defaultTestImage

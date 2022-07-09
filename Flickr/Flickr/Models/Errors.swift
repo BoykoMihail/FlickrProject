@@ -7,14 +7,16 @@
 
 import Foundation
 
-enum FlickrServiceCustomErrors: Error {
-    case thisIsLastPage
-    case wrongURL
-    case ephtyData
-    case decodeError
-}
-
 enum ImageLoaderCustomErrors: Error {
     case imageLoaderError
     case emphtyImage
+}
+
+enum RequestError: Error {
+    case decodeError
+    case invalidURL
+    case noResponseError
+    case unexpectedStatusCode
+    case unknownError
+    case thisIsLastPage
 }

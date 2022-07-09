@@ -7,32 +7,37 @@
 
 import UIKit
 
-final class ImageLoader: IImageLoader {
+actor ImageLoader: IImageLoader {
     
-    private let imageCash: IImageCache
+    private var cache: IImageCache
     
-    init(imageCash: IImageCache) {
-        self.imageCash = imageCash
+    init(cache: IImageCache) {
+        self.cache = cache
     }
     
-    func downloadImage(from url: URL, completion: @escaping ImageLoaderResponse) {
-        if let image = imageCash[url] {
-            completion(nil, image)
-            return
+    func image(from url: URL) async throws -> UIImage? {
+        if let cachedImage = cache[url] {
+            return cachedImage
         }
-
-        getData(from: url) { data, _, error in
-            guard let data = data, error == nil, let image = UIImage(data: data) else {
-                completion(ImageLoaderCustomErrors.imageLoaderError, nil) // Можно дефолтную поставить
-                return
-            }
-            
-            self.imageCash[url] = image
-            completion(nil, image)
+        
+        do {
+            let image = try await downloadImage(from: url)
+            cache[url] = image
+            return image
+        } catch {
+            cache[url] = nil
+            throw error
         }
     }
     
-    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    private func downloadImage(from url: URL) async throws -> UIImage {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard (response as? HTTPURLResponse)?.statusCode == 200,
+              let image = UIImage(data: data) else {
+            throw ImageLoaderCustomErrors.imageLoaderError
+        }
+        
+        return image
     }
 }
