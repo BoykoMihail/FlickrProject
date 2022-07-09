@@ -7,7 +7,7 @@
 
 import Foundation
 
-actor FlickrService: HTTPClient, IFlickrService {
+final class FlickrService: HTTPClient, IFlickrService {
     
     func fetchPhotos(perPage: Int, page: Int) async -> FlickrResponse {
         let uiTesting = ProcessInfo.processInfo.arguments.contains("Testing")

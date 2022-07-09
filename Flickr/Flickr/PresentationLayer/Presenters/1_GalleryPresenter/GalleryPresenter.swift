@@ -155,22 +155,22 @@ final class GalleryPresenter: IGalleryPresenter {
     private func getCellViewModelOn(index: Int) {
         Task(priority: .background) {
             if index > countOfPhotos - Int.numberOfCellWhenItNeedsToUpdate {
-//                clearImage(index: index)
+                clearImage(index: index)
                 loadPhotos()
             }
         }
     }
     
-//    private func clearImage(index: Int) {
-//        Task(priority: .background) {
-//            (0..<countOfPhotos).forEach { i in
-//                if abs(i-index) > Int.amountOfFirstLevelCache/2,
-//                   photos[i]?.image != nil {
-//                    photos[i]?.image = nil
-//                }
-//            }
-//        }
-//    }
+    private func clearImage(index: Int) {
+        Task(priority: .background) {
+            (0..<countOfPhotos).forEach { i in
+                if abs(i-index) > Int.amountOfFirstLevelCache/2,
+                   photos[i]?.image != nil {
+                    photos[i]?.image = nil
+                }
+            }
+        }
+    }
     
     private func updatePhotosModel(flickrPhoto: [FlickrPhoto]) {
         photos.append(contentsOf: flickrPhoto)
