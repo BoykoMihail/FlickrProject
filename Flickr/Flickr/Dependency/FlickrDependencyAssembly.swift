@@ -11,8 +11,16 @@ import UIKit
 final class FlickrDependencyAssembly {
     lazy var navigationController = UINavigationController()
 
-    lazy var flickrService: IFlickrService = {
+    private lazy var _flickrService = {
         FlickrService()
+    }()
+    
+    lazy var flickrService: IFlickrService = {
+        _flickrService
+    }()
+    
+    lazy var cacheExexutor: CacheExexutor = {
+        _flickrService
     }()
 
     lazy var imageCache: IImageCache = {
@@ -47,7 +55,7 @@ final class FlickrDependencyAssembly {
     }()
     
     lazy var prepareForLoadingService = {
-        PrepareForLoadingService(cacheExexutor: flickrService,
+        PrepareForLoadingService(cacheExexutor: cacheExexutor,
                                  imageLoader: imageLoader)
     }()
 }

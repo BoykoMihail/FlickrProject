@@ -9,6 +9,6 @@ import Foundation
 
 typealias FlickrResponse = FetchPhotosResult
 
-protocol IFlickrService: CacheExexutor {
+protocol IFlickrService {
     func fetchPhotos(perPage: Int, page: Int) async throws -> FlickrResponse
 }

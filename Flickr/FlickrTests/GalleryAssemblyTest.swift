@@ -12,19 +12,19 @@ class GalleryAssemblyTest: XCTestCase {
     private var galleryAssembly: GalleryAssembly!
 
     private var paginatorHelperMock: PaginatorHelperMock!
-    private var imageLoaderMock: ImageLoaderMock!
+    private var imageHelperMock: ImageHelperMock!
     private var mainGalleryRouterMock: MainGalleryRouterMock!
 
     @MainActor override func setUp() {
         super.setUp()
 
         paginatorHelperMock = PaginatorHelperMock()
-        imageLoaderMock = ImageLoaderMock()
+        imageHelperMock = ImageHelperMock()
         mainGalleryRouterMock = MainGalleryRouterMock()
 
         galleryAssembly = GalleryAssembly(
             paginatorHelper: paginatorHelperMock,
-            imageLoader: imageLoaderMock,
+            imageHelper: imageHelperMock,
             router: mainGalleryRouterMock
         )
     }
@@ -34,7 +34,7 @@ class GalleryAssemblyTest: XCTestCase {
 
         galleryAssembly = nil
         paginatorHelperMock = nil
-        imageLoaderMock = nil
+        imageHelperMock = nil
         mainGalleryRouterMock = nil
     }
 

@@ -12,7 +12,7 @@ class GalleryPresenterTest: XCTestCase {
     private var galleryPresenter: GalleryPresenter!
 
     private var paginatorHelperMock: PaginatorHelperMock!
-    private var imageLoaderMock: ImageLoaderMock!
+    private var imageHelperMock: ImageHelperMock!
     private var mainGalleryRouter: MainGalleryRouterMock!
     private var galleryViewMock: GalleryViewMock!
 
@@ -20,13 +20,13 @@ class GalleryPresenterTest: XCTestCase {
         super.setUp()
 
         paginatorHelperMock = PaginatorHelperMock()
-        imageLoaderMock = ImageLoaderMock()
+        imageHelperMock = ImageHelperMock()
         mainGalleryRouter = MainGalleryRouterMock()
         galleryViewMock = GalleryViewMock()
 
         galleryPresenter = GalleryPresenter(
             paginatorHelper: paginatorHelperMock,
-            imageLoader: imageLoaderMock,
+            imageHelper: imageHelperMock,
             router: mainGalleryRouter)
 
         galleryPresenter.viewController = galleryViewMock
@@ -87,24 +87,23 @@ class GalleryPresenterTest: XCTestCase {
 
     func testCallDownloadImageFromLoadPhotos() async throws {
         // given
-        let expectation = expectation(description: "testCallDownloadImageFromLoadPhotos")
+        let predicate = NSPredicate { _, _ -> Bool in
+            return self.imageHelperMock.invokedUpdatePhotosModel == true
+        }
+        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: imageHelperMock)
 
         let photos = [
             FlickrPhoto.getFlickrPhotoStub(photoId: "1")
         ]
         paginatorHelperMock.stubbedLoadInitialDataResult = photos
-        imageLoaderMock.stubbedImageError = RequestError.unknownError
-
-        imageLoaderMock.invokedImageCallBack = {
-            expectation.fulfill()
-        }
+        imageHelperMock.stubbedGetImageForError = RequestError.unknownError
 
         // when
         await galleryPresenter.viewDidLoad()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [publishExpectation], timeout: 3.0)
 
         // then
-        XCTAssertTrue(imageLoaderMock.invokedImage)
+        XCTAssertTrue(imageHelperMock.invokedUpdatePhotosModel)
     }
 
     @MainActor func testDidTapCellLogicWithoutImage() async throws {
