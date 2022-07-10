@@ -34,27 +34,33 @@ class GalleryPresenterTest: XCTestCase {
 
     func testCallFetchPhotos() async throws {
         // given
-        let predicate = NSPredicate { _, _ -> Bool in
+        let predicate = NSPredicate { _, _ in
             return self.paginatorHelperMock.invokedLoadInitialData == true
         }
-        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: paginatorHelperMock)
+        let testCallFetchPhotosExpectation = XCTNSPredicateExpectation(
+            predicate: predicate,
+            object: paginatorHelperMock
+        )
 
         paginatorHelperMock.stubbedLoadInitialDataResult = []
 
         // when
         await galleryPresenter.viewDidLoad()
 
-        wait(for: [publishExpectation], timeout: 3.0)
+        wait(for: [testCallFetchPhotosExpectation], timeout: 3.0)
         // then
         XCTAssertTrue(paginatorHelperMock.invokedLoadInitialData)
     }
 
     func testUpdatePhotosAfterLoadPhotos() async throws {
         // given
-        let predicate = NSPredicate { _, _ -> Bool in
+        let predicate = NSPredicate { _, _ in
             return self.paginatorHelperMock.invokedLoadInitialData == true
         }
-        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: paginatorHelperMock)
+        let testUpdatePhotosAfterLoadPhotosExpectation = XCTNSPredicateExpectation(
+            predicate: predicate,
+            object: paginatorHelperMock
+        )
 
         let photos = [
             FlickrPhoto.getFlickrPhotoStub(photoId: "1"),
@@ -68,7 +74,7 @@ class GalleryPresenterTest: XCTestCase {
         // when
         await galleryPresenter.viewDidLoad()
         
-        wait(for: [publishExpectation], timeout: 3.0)
+        wait(for: [testUpdatePhotosAfterLoadPhotosExpectation], timeout: 3.0)
         // then
         XCTAssertEqual(galleryPresenter.countOfPhotos, photos.count)
     }
@@ -87,10 +93,14 @@ class GalleryPresenterTest: XCTestCase {
 
     func testCallDownloadImageFromLoadPhotos() async throws {
         // given
-        let predicate = NSPredicate { _, _ -> Bool in
+        let predicate = NSPredicate { _, _ in
             return self.imageHelperMock.invokedUpdatePhotosModel == true
         }
-        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: imageHelperMock)
+        
+        let testCallDownloadImageExpectation = XCTNSPredicateExpectation(
+            predicate: predicate,
+            object: imageHelperMock
+        )
 
         let photos = [
             FlickrPhoto.getFlickrPhotoStub(photoId: "1")
@@ -100,7 +110,7 @@ class GalleryPresenterTest: XCTestCase {
 
         // when
         await galleryPresenter.viewDidLoad()
-        wait(for: [publishExpectation], timeout: 3.0)
+        wait(for: [testCallDownloadImageExpectation], timeout: 3.0)
 
         // then
         XCTAssertTrue(imageHelperMock.invokedUpdatePhotosModel)

@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class FlickrService: HTTPClient, IFlickrService {
+final class FlickrService: HTTPClient, IFlickrService {    
+    let urlSession: URLSessionProtocol
+    
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+
     func fetchPhotos(perPage: Int, page: Int) async throws -> FlickrResponse {
         #if DEBUG
         let uiTesting = ProcessInfo.processInfo.arguments.contains("Testing")

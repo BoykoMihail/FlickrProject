@@ -8,6 +8,8 @@
 import Foundation
 
 protocol HTTPClient {
+    var urlSession: URLSessionProtocol { get }
+    
     func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async throws -> T
 }
 
@@ -34,7 +36,7 @@ extension HTTPClient {
             request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         }
 
-        let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
+        let (data, response) = try await urlSession.data(for: request, delegate: nil)
         guard let response = response as? HTTPURLResponse else {
             throw RequestError.noResponseError
         }

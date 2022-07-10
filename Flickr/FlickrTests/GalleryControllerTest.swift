@@ -41,15 +41,18 @@ class GalleryControllerTest: XCTestCase {
     func testPresenterViewDidLoadCaled() throws {
         // given
         
-        let predicate = NSPredicate { _, _ -> Bool in
+        let predicate = NSPredicate { _, _ in
             return self.galleryPresenterMock.invokedViewDidLoad == true
         }
-        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: galleryPresenterMock)
+        let testPresenterViewDidLoadCaledExpectation = XCTNSPredicateExpectation(
+            predicate: predicate,
+            object: galleryPresenterMock
+        )
         
         // when
             
         galleryController.viewDidLoad()
-        wait(for: [publishExpectation], timeout: 3.0)
+        wait(for: [testPresenterViewDidLoadCaledExpectation], timeout: 3.0)
         
         // then
         XCTAssertTrue(galleryPresenterMock.invokedViewDidLoad)

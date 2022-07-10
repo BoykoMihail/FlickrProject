@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FlickrPhoto: Decodable {
+struct FlickrPhoto: Codable {
     let photoId: String
     let title: String
     let height: Int

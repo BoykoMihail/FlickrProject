@@ -5,7 +5,7 @@
 //  Created by Михаил Бойко on 25.06.2022.
 //
 
-struct FlickrPhotos: Decodable {
+struct FlickrPhotos: Codable {
     let photo: [FlickrPhoto]
     let page: Int
     let pages: Int
@@ -20,6 +20,14 @@ struct FlickrPhotos: Decodable {
         self.photo = photo
         self.page = page
         self.pages = pages
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(photo, forKey: .photo)
+        try container.encode(page, forKey: .page)
+        try container.encode(pages, forKey: .pages)
+
     }
 }
 
