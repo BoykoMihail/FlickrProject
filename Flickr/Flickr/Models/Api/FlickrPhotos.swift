@@ -6,17 +6,16 @@
 //
 
 struct FlickrPhotos: Decodable {
-    
     let photo: [FlickrPhoto]
     let page: Int
     let pages: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case photo
         case page
         case pages
     }
-    
+
     init(photo: [FlickrPhoto], page: Int, pages: Int) {
         self.photo = photo
         self.page = page
@@ -25,7 +24,6 @@ struct FlickrPhotos: Decodable {
 }
 
 extension FlickrPhotos {
-    
     static func getFlickrPhotoStub(countOfPhotos: Int) -> FlickrPhotos {
         var photos = [FlickrPhoto]()
         (0..<countOfPhotos).forEach {

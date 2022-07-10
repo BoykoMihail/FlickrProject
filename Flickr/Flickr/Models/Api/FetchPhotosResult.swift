@@ -6,13 +6,12 @@
 //
 
 struct FetchPhotosResult: Decodable {
-    
     let photos: FlickrPhotos
-    
+
     enum CodingKeys: String, CodingKey {
         case photos
     }
-    
+
     init(photos: FlickrPhotos) {
         self.photos = photos
     }

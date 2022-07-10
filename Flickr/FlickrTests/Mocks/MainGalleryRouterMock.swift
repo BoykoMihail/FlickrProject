@@ -5,22 +5,21 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import Foundation
 @testable import Flickr
+import UIKit
 
 class MainGalleryRouterMock: IMainGalleryRouter {
-
     var invokedMoveToDetailsImageView = false
     var invokedMoveToDetailsImageViewCount = 0
-    var invokedMoveToDetailsImageViewParameters: (viewModel: FlickrPhoto, Void)?
-    var invokedMoveToDetailsImageViewParametersList = [(viewModel: FlickrPhoto, Void)]()
-    var invokedMoveToDetailsImageViewCallBack: (() -> ())?
+    var invokedMoveToDetailsImageViewParameters: (model: MainGalleryRouterModel, Void)?
+    var invokedMoveToDetailsImageViewParametersList = [(model: MainGalleryRouterModel, Void)]()
+    var invokedMoveToDetailsImageViewCallBack: (() -> Void)?
 
-    func moveToDetailsImageView(viewModel: FlickrPhoto) {
+    func moveToDetailsImageView(model: MainGalleryRouterModel) {
         invokedMoveToDetailsImageView = true
         invokedMoveToDetailsImageViewCount += 1
-        invokedMoveToDetailsImageViewParameters = (viewModel, ())
-        invokedMoveToDetailsImageViewParametersList.append((viewModel, ()))
+        invokedMoveToDetailsImageViewParameters = (model, ())
+        invokedMoveToDetailsImageViewParametersList.append((model, ()))
         if let callBack = invokedMoveToDetailsImageViewCallBack {
             callBack()
         }

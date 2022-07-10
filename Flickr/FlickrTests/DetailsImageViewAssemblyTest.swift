@@ -5,8 +5,8 @@
 //  Created by Михаил Бойко on 27.06.2022.
 //
 
-import XCTest
 @testable import Flickr
+import XCTest
 
 private extension CGSize {
     static let defaultTestSize = CGSize(width: 200, height: 100)
@@ -21,18 +21,17 @@ private extension UIImage {
 }
 
 class DetailsImageViewAssemblyTest: XCTestCase {
-
     private var detailsImageViewAssembly: DetailsImageViewAssembly!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         detailsImageViewAssembly = DetailsImageViewAssembly()
     }
-    
+
     override func tearDown() {
         super.tearDown()
-        
+
         detailsImageViewAssembly = nil
     }
 
@@ -43,16 +42,16 @@ class DetailsImageViewAssemblyTest: XCTestCase {
             name: .defaultTestName,
             size: .defaultTestSize
         )
-        
+
         // when
         let viewController = detailsImageViewAssembly.assembly(viewModel: viewModel)
-        
+
         // then
         guard let galleryController = viewController as? ImageDetailViewController else {
             XCTFail("Assembler вернул не ImageDetailViewController")
             return
         }
-        
+
         XCTAssertTrue(galleryController.presenter is ImageDetailViewPresenter)
     }
 }

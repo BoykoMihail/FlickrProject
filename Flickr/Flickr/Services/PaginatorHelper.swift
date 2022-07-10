@@ -11,42 +11,35 @@ private extension Int {
     static let perPage = 30
 }
 
-typealias PaginatorHelperResult = Result<[FlickrPhoto], RequestError>
+typealias PaginatorHelperResult = [FlickrPhoto]
 
 actor PaginatorHelper: IPaginatorHelper {
-    
     private let flickrService: IFlickrService
-    
+
     private var currentPage = 1
     private var amountOfPages = 1
-    
+
     init(flickrService: IFlickrService) {
         self.flickrService = flickrService
     }
-    
-    func loadInitialData() async -> PaginatorHelperResult {
-        let fetchPhotosResult = await flickrService.fetchPhotos(perPage: .perPage, page: 0)
+
+    func loadInitialData() async throws -> PaginatorHelperResult {
+        let fetchPhotosResult = try await flickrService.fetchPhotos(perPage: .perPage, page: 0)
         return getPaginatorHelperResultFrom(fetchPhotosResult)
     }
-    
-    func loadNextPage() async -> PaginatorHelperResult {
-        let fetchPhotosResult = await flickrService.fetchPhotos(perPage: .perPage, page: currentPage)
+
+    func loadNextPage() async throws -> PaginatorHelperResult {
+        let fetchPhotosResult = try await flickrService.fetchPhotos(perPage: .perPage, page: currentPage)
         return getPaginatorHelperResultFrom(fetchPhotosResult)
     }
-    
+
     private func getPaginatorHelperResultFrom(_ flickrResponse: FlickrResponse) -> PaginatorHelperResult {
-        switch flickrResponse {
-        case let .success(fetchPhotosResult):
-            updatePage(newAmountOfPages: fetchPhotosResult.photos.pages)
-            return .success(fetchPhotosResult.photos.photo)
-        case let .failure(error):
-            return .failure(error)
-        }
+        updatePage(newAmountOfPages: flickrResponse.photos.pages)
+        return flickrResponse.photos.photo
     }
-    
+
     private func updatePage(newAmountOfPages: Int) {
-        currentPage+=1
+        currentPage += 1
         amountOfPages = newAmountOfPages
     }
-    
 }

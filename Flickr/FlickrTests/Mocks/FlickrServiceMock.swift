@@ -5,11 +5,10 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import Foundation
 @testable import Flickr
+import Foundation
 
 class FlickrServiceMock: IFlickrService {
-
     var invokedFetchPhotos = false
     var invokedFetchPhotosCount = 0
     var invokedFetchPhotosParameters: (perPage: Int, page: Int)?

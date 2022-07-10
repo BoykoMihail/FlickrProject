@@ -5,11 +5,10 @@
 //  Created by Михаил Бойко on 27.06.2022.
 //
 
-import UIKit
 @testable import Flickr
+import UIKit
 
 class ImageCacheMock: IImageCache {
-
     var invokedSubscriptGetter = false
     var invokedSubscriptGetterCount = 0
     var invokedSubscriptGetterParameters: (url: URL, Void)?
@@ -23,6 +22,13 @@ class ImageCacheMock: IImageCache {
     var invokedSubscriptList = [UIImage?]()
 
     subscript(_ url: URL) -> UIImage? {
+        get {
+            invokedSubscriptGetter = true
+            invokedSubscriptGetterCount += 1
+            invokedSubscriptGetterParameters = (url, ())
+            invokedSubscriptGetterParametersList.append((url, ()))
+            return stubbedSubscriptResult
+        }
         set {
             invokedSubscriptSetter = true
             invokedSubscriptSetterCount += 1
@@ -30,13 +36,6 @@ class ImageCacheMock: IImageCache {
             invokedSubscriptSetterParametersList.append((url, ()))
             invokedSubscript = newValue
             invokedSubscriptList.append(newValue)
-        }
-        get {
-            invokedSubscriptGetter = true
-            invokedSubscriptGetterCount += 1
-            invokedSubscriptGetterParameters = (url, ())
-            invokedSubscriptGetterParametersList.append((url, ()))
-            return stubbedSubscriptResult
         }
     }
 

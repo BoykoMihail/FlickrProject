@@ -8,24 +8,24 @@
 import Foundation
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async -> Result<T, RequestError>
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async throws -> T
 }
 
 extension HTTPClient {
     func sendRequest<T: Decodable>(endpoint: Endpoint,
-                                   responseModel: T.Type) async -> Result<T, RequestError> {
+                                   responseModel: T.Type)  async throws -> T {
         guard var components = URLComponents(string: endpoint.baseURL + endpoint.path) else {
-            return .failure(.invalidURL)
+            throw RequestError.invalidURL
         }
-        
+
         components.queryItems = endpoint.queryItems?.map({ (key: String, value: String) in
             URLQueryItem(name: key, value: value)
         })
-        
+
         guard let url = components.url else {
-            return .failure(.invalidURL)
+            throw RequestError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header
@@ -33,23 +33,19 @@ extension HTTPClient {
         if let body = endpoint.body {
             request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
         }
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
-            guard let response = response as? HTTPURLResponse else {
-                return .failure(.noResponseError)
+
+        let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
+        guard let response = response as? HTTPURLResponse else {
+            throw RequestError.noResponseError
+        }
+        switch response.statusCode {
+        case 200...299:
+            guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
+                throw RequestError.decodeError
             }
-            switch response.statusCode {
-            case 200...299:
-                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
-                    return .failure(.decodeError)
-                }
-                return .success(decodedResponse)
-            default:
-                return .failure(.unexpectedStatusCode)
-            }
-        } catch {
-            return .failure(.unknownError)
+            return decodedResponse
+        default:
+            throw RequestError.unexpectedStatusCode
         }
     }
 }

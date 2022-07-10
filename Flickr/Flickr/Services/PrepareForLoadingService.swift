@@ -8,16 +8,15 @@
 import Foundation
 
 final class PrepareForLoadingService {
-    
     let cacheExexutor: CacheExexutor
     let imageLoader: IImageLoader
-    
+
     init(cacheExexutor: CacheExexutor,
          imageLoader: IImageLoader) {
         self.cacheExexutor = cacheExexutor
         self.imageLoader = imageLoader
     }
-    
+
     func prepareForLoading() {
         Task(priority: .background) {
             let imageUrls = await cacheExexutor.warmUpCache(perPage: 200,
@@ -25,11 +24,12 @@ final class PrepareForLoadingService {
             if let imageUrls = imageUrls {
                 imageUrls.forEach { url in
                     Task(priority: .background) {
-                        try await imageLoader.image(from: url)
+                        do {
+                            _ = try await imageLoader.image(from: url)
+                        } catch { }
                     }
                 }
             }
         }
-        
     }
 }

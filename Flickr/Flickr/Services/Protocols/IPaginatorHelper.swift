@@ -8,6 +8,6 @@
 import Foundation
 
 protocol IPaginatorHelper {
-    func loadInitialData() async -> PaginatorHelperResult
-    func loadNextPage() async -> PaginatorHelperResult
+    func loadInitialData() async throws -> PaginatorHelperResult
+    func loadNextPage() async throws -> PaginatorHelperResult
 }

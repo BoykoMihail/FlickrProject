@@ -5,11 +5,10 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import Foundation
 @testable import Flickr
+import Foundation
 
 class ImageDetailViewPresenterMock: IImageDetailViewPresenter {
-
     var invokedViewDidLoad = false
     var invokedViewDidLoadCount = 0
 

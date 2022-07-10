@@ -5,8 +5,9 @@
 //  Created by Михаил Бойко on 25.06.2022.
 //
 
-import Foundation
+import UIKit
 
+@MainActor
 protocol IMainGalleryRouter {
-    func moveToDetailsImageView(viewModel: FlickrPhoto)
+    func moveToDetailsImageView(model: MainGalleryRouterModel)
 }

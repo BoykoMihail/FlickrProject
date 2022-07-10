@@ -8,26 +8,28 @@
 import Foundation
 
 final class FlickrService: HTTPClient, IFlickrService {
-    
-    func fetchPhotos(perPage: Int, page: Int) async -> FlickrResponse {
+    func fetchPhotos(perPage: Int, page: Int) async throws -> FlickrResponse {
+        #if DEBUG
         let uiTesting = ProcessInfo.processInfo.arguments.contains("Testing")
 
         guard !uiTesting else {
-            return .success(FetchPhotosResult.getFlickrPhotoStub())
+            return FetchPhotosResult.getFlickrPhotoStub()
         }
-        
-        return await sendRequest(endpoint: PhotosEndpoint.getRecent(perPage: perPage, page: page), responseModel: FetchPhotosResult.self)
+        #endif
+
+        return try await sendRequest(
+            endpoint: PhotosEndpoint.getRecent(perPage: perPage, page: page),
+            responseModel: FetchPhotosResult.self
+        )
     }
 }
 
 extension FlickrService: CacheExexutor {
     func warmUpCache(perPage: Int, page: Int) async -> CacheExexutorResponse {
-        let flickrPhotoResult = await fetchPhotos(perPage: perPage, page: page)
-        
-        switch flickrPhotoResult {
-        case let .success(results):
-            return results.photos.photo.compactMap { URL(string: $0.photoUrl) }
-        case .failure(_):
+        do {
+            let flickrPhotoResult = try await fetchPhotos(perPage: perPage, page: page)
+            return flickrPhotoResult.photos.photo.compactMap { $0.url }
+        } catch {
             return nil
         }
     }

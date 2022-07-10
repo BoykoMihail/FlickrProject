@@ -5,11 +5,10 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import UIKit
 @testable import Flickr
+import UIKit
 
 class ImageDetailViewMock: IImageDetailView {
-
     var invokedViewWidthGetter = false
     var invokedViewWidthGetterCount = 0
     var stubbedViewWidth: CGFloat!
@@ -22,14 +21,15 @@ class ImageDetailViewMock: IImageDetailView {
 
     var invokedUpdateImage = false
     var invokedUpdateImageCount = 0
-    var invokedUpdateImageParameters: (image: UIImage, width: CGFloat, height: CGFloat)?
-    var invokedUpdateImageParametersList = [(image: UIImage, width: CGFloat, height: CGFloat)]()
+    var invokedUpdateImageParameters: (image: UIImage,
+                                       size: CGSize)?
+    var invokedUpdateImageParametersList = [(image: UIImage, size: CGSize)]()
 
-    func updateImage(with image: UIImage, width: CGFloat, height: CGFloat) {
+    func updateImage(with image: UIImage, size: CGSize) {
         invokedUpdateImage = true
         invokedUpdateImageCount += 1
-        invokedUpdateImageParameters = (image, width, height)
-        invokedUpdateImageParametersList.append((image, width, height))
+        invokedUpdateImageParameters = (image, size)
+        invokedUpdateImageParametersList.append((image, size))
     }
 
     var invokedUpdateLabel = false

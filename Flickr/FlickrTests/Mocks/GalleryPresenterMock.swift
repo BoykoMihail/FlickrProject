@@ -5,11 +5,10 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import UIKit
 @testable import Flickr
+import UIKit
 
 class GalleryPresenterMock: IGalleryPresenter {
-
     var invokedTitleGetter = false
     var invokedTitleGetterCount = 0
     var stubbedTitle: String! = ""
@@ -32,10 +31,12 @@ class GalleryPresenterMock: IGalleryPresenter {
 
     var invokedViewDidLoad = false
     var invokedViewDidLoadCount = 0
+    var invokedViewDidLoadCallBack: (() -> Void)?
 
     func viewDidLoad() {
         invokedViewDidLoad = true
         invokedViewDidLoadCount += 1
+        invokedViewDidLoadCallBack?()
     }
 
     var invokedDidTapCell = false

@@ -5,72 +5,56 @@
 //  Created by Михаил Бойко on 26.06.2022.
 //
 
-import XCTest
 @testable import Flickr
+import XCTest
 
 class GalleryPresenterTest: XCTestCase {
-
     private var galleryPresenter: GalleryPresenter!
-    
+
     private var paginatorHelperMock: PaginatorHelperMock!
     private var imageLoaderMock: ImageLoaderMock!
     private var mainGalleryRouter: MainGalleryRouterMock!
     private var galleryViewMock: GalleryViewMock!
 
-    override func setUp() {
+    @MainActor override func setUp() {
         super.setUp()
-        
+
         paginatorHelperMock = PaginatorHelperMock()
         imageLoaderMock = ImageLoaderMock()
         mainGalleryRouter = MainGalleryRouterMock()
         galleryViewMock = GalleryViewMock()
-        
+
         galleryPresenter = GalleryPresenter(
             paginatorHelper: paginatorHelperMock,
             imageLoader: imageLoaderMock,
             router: mainGalleryRouter)
-        
+
         galleryPresenter.viewController = galleryViewMock
     }
 
-    func testIsUpdatingLogic() throws {
+    func testCallFetchPhotos() async throws {
         // given
-        let expectation = expectation(description: "testIsUpdatingLogic")
-        
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success([])
-        
-        // when
-        galleryPresenter.viewDidLoad()
-        galleryPresenter.viewDidLoad()
-        galleryPresenter.viewDidLoad()
-        paginatorHelperMock.invokedLoadInitialDataCallBack = {
-            expectation.fulfill()
+        let predicate = NSPredicate { _, _ -> Bool in
+            return self.paginatorHelperMock.invokedLoadInitialData == true
         }
-        wait(for: [expectation], timeout: 1.0)
-        
-        // then
-        XCTAssertEqual(paginatorHelperMock.invokedLoadInitialDataCount, 1)
-    }
-    
-    func testCallFetchPhotos() throws {
-        // given
-        let expectation = expectation(description: "testCallFetchPhotos")
-        
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success([])
-        
+        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: paginatorHelperMock)
+
+        paginatorHelperMock.stubbedLoadInitialDataResult = []
+
         // when
-        galleryPresenter.viewDidLoad()
-        paginatorHelperMock.invokedLoadInitialDataCallBack = {
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
+        await galleryPresenter.viewDidLoad()
+
+        wait(for: [publishExpectation], timeout: 3.0)
         // then
         XCTAssertTrue(paginatorHelperMock.invokedLoadInitialData)
     }
-    
-    func testUpdatePhotosAfterLoadPhotos() throws {
+
+    func testUpdatePhotosAfterLoadPhotos() async throws {
         // given
-        let expectation = expectation(description: "testUpdatePhotosAfterLoadPhotos")
+        let predicate = NSPredicate { _, _ -> Bool in
+            return self.paginatorHelperMock.invokedLoadInitialData == true
+        }
+        let publishExpectation = XCTNSPredicateExpectation(predicate: predicate, object: paginatorHelperMock)
 
         let photos = [
             FlickrPhoto.getFlickrPhotoStub(photoId: "1"),
@@ -79,110 +63,60 @@ class GalleryPresenterTest: XCTestCase {
             FlickrPhoto.getFlickrPhotoStub(photoId: "4"),
             FlickrPhoto.getFlickrPhotoStub(photoId: "5")
         ]
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success(photos)
+        paginatorHelperMock.stubbedLoadInitialDataResult = photos
 
         // when
-        galleryPresenter.viewDidLoad()
-        paginatorHelperMock.invokedLoadInitialDataCallBack = {
-            expectation.fulfill()
-        }
+        await galleryPresenter.viewDidLoad()
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [publishExpectation], timeout: 3.0)
         // then
         XCTAssertEqual(galleryPresenter.countOfPhotos, photos.count)
     }
-    
-    func testUpdatePhotosAfterLoadPhotosError() throws {
+
+    func testUpdatePhotosAfterLoadPhotosError() async throws {
         // given
 
-        paginatorHelperMock.stubbedLoadInitialDataResult = .failure(RequestError.unknownError)
-        
+        paginatorHelperMock.stubbedLoadInitialDataError = RequestError.unknownError
+
         // when
-        galleryPresenter.viewDidLoad()
-        
+        await galleryPresenter.viewDidLoad()
+
         // then
         XCTAssertEqual(galleryPresenter.countOfPhotos, 0)
     }
-    
-    func testCallViewUpdateData() throws {
-        // given
-        let expectation = expectation(description: "UpdateData")
 
-        let photos = [
-            FlickrPhoto.getFlickrPhotoStub(photoId: "1"),
-            FlickrPhoto.getFlickrPhotoStub(photoId: "2"),
-            FlickrPhoto.getFlickrPhotoStub(photoId: "3"),
-            FlickrPhoto.getFlickrPhotoStub(photoId: "4"),
-            FlickrPhoto.getFlickrPhotoStub(photoId: "5")
-        ]
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success(photos)
-        galleryViewMock.callBackForUpdateDataExpectation = {
-            expectation.fulfill()
-        }
-        
-        // when
-        galleryPresenter.viewDidLoad()
-        wait(for: [expectation], timeout: 1.0)
-        
-        // then
-        XCTAssertTrue(galleryViewMock.invokedUpdateData)
-    }
-    
-    func testCallDownloadImageFromLoadPhotos() throws {
+    func testCallDownloadImageFromLoadPhotos() async throws {
         // given
         let expectation = expectation(description: "testCallDownloadImageFromLoadPhotos")
 
         let photos = [
             FlickrPhoto.getFlickrPhotoStub(photoId: "1")
         ]
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success(photos)
+        paginatorHelperMock.stubbedLoadInitialDataResult = photos
         imageLoaderMock.stubbedImageError = RequestError.unknownError
-        
+
         imageLoaderMock.invokedImageCallBack = {
             expectation.fulfill()
         }
-        
+
         // when
-        galleryPresenter.viewDidLoad()
+        await galleryPresenter.viewDidLoad()
         wait(for: [expectation], timeout: 1.0)
-        
+
         // then
         XCTAssertTrue(imageLoaderMock.invokedImage)
     }
-    
-    func testDidTapCellLogicWithImage() throws {
-        // given
-        let expectation = expectation(description: "testDidTapCellLogicWithImage")
 
-        let photos = [
-            FlickrPhoto.getFlickrPhotoStub(photoId: "1", image: UIImage())
-        ]
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success(photos)
-
-        // when
-        galleryPresenter.viewDidLoad()
-        paginatorHelperMock.invokedLoadInitialDataCallBack = {
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 1.0)
-        
-        galleryPresenter.didTapCell(indexPath: 0)
-
-        // then
-        XCTAssertTrue(mainGalleryRouter.invokedMoveToDetailsImageView)
-    }
-    
-    func testDidTapCellLogicWithoutImage() throws {
+    @MainActor func testDidTapCellLogicWithoutImage() async throws {
         // given
 
         let photos: [FlickrPhoto] = []
-        paginatorHelperMock.stubbedLoadInitialDataResult = .success(photos)
+        paginatorHelperMock.stubbedLoadInitialDataResult = photos
 
         // when
-        galleryPresenter.viewDidLoad()
+        await galleryPresenter.viewDidLoad()
         galleryPresenter.didTapCell(indexPath: 0)
-        
+
         // then
         XCTAssertFalse(mainGalleryRouter.invokedMoveToDetailsImageView)
     }

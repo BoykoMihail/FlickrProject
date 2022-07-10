@@ -13,8 +13,7 @@ struct FlickrPhoto: Decodable {
     let height: Int
     let width: Int
     let photoUrl: String
-    var image: UIImage?
-    
+
     enum CodingKeys: String, CodingKey {
         case photoId = "id"
         case title
@@ -22,21 +21,19 @@ struct FlickrPhoto: Decodable {
         case width = "width_m"
         case photoUrl = "url_m"
     }
-    
+
     init(photoId: String,
          title: String,
          height: Int,
          width: Int,
-         photoUrl: String,
-         image: UIImage?) {
+         photoUrl: String) {
         self.photoId = photoId
         self.title = title
         self.height = height
         self.width = width
         self.photoUrl = photoUrl
-        self.image = image
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         photoId = try container.decode(String.self, forKey: .photoId)
@@ -51,7 +48,7 @@ struct FlickrPhoto: Decodable {
         } else {
             self.width = 0
         }
-        
+
         if let photoUrl = try? container.decode(String.self, forKey: .photoUrl) {
             self.photoUrl = photoUrl
         } else {
@@ -60,15 +57,29 @@ struct FlickrPhoto: Decodable {
     }
 }
 
+extension FlickrPhoto {
+    var url: URL? {
+        guard let url = URL(string: photoUrl) else {
+            return nil
+        }
+        
+        return url
+    }
+}
 
 extension FlickrPhoto {
-    
     static func getFlickrPhotoStub(photoId: String = "1",
                                    title: String = "image",
                                    height: Int = 200,
                                    width: Int = 100,
-                                   photoUrl: String = "https://www.wikihow.com/images_en/thumb/d/db/Get-the-URL-for-Pictures-Step-2-Version-6.jpg/v4-460px-Get-the-URL-for-Pictures-Step-2-Version-6.jpg.webp",
+                                   photoUrl: String = .photoUrl,
                                    image: UIImage? = nil) -> FlickrPhoto {
-        FlickrPhoto(photoId: photoId, title: title, height: height, width: width, photoUrl: photoUrl, image: image)
+        FlickrPhoto(photoId: photoId, title: title, height: height, width: width, photoUrl: photoUrl)
     }
+}
+
+private extension String {
+    // swiftlint:disable line_length
+    static let photoUrl = "https://www.wikihow.com/images_en/thumb/d/db/Get-the-URL-for-Pictures-Step-2-Version-6.jpg/v4-460px-Get-the-URL-for-Pictures-Step-2-Version-6.jpg.webp"
+    // swiftlint:enable line_length
 }
