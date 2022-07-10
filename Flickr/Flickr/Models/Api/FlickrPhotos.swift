@@ -27,7 +27,6 @@ struct FlickrPhotos: Codable {
         try container.encode(photo, forKey: .photo)
         try container.encode(page, forKey: .page)
         try container.encode(pages, forKey: .pages)
-
     }
 }
 
